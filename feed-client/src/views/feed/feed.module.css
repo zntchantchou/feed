@@ -4,16 +4,15 @@
   grid-gap: 1.3rem;
   grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
   grid-template-rows: repeat(auto-fit, 17rem);
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   width: calc( 100vw - 15rem );
+  height: calc( 100vh - 3rem);
   padding: 2rem;
   backdrop-filter: sepia(90%);
   box-sizing: border-box;
   background-color:lightgrey ;
-  /* background-image: url('./cardboard-texture.jpg'); */
   background-image: url('../../../public/cardboard.jpg');
-  /* overflow: hidden; */
 }
 
 /* width */

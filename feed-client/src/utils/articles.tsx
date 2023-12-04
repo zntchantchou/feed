@@ -5,7 +5,7 @@ export function saveArticlesToLocalStorage(articles: Article[]): void {
     updatedAt: new Date().toISOString(),
     articles,
   };
-  console.log("SAVING ITEMS");
+  // console.log("SAVING ITEMS");
   localStorage.setItem("data", JSON.stringify(updatedArticles));
 }
 

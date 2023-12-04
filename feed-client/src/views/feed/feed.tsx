@@ -6,11 +6,10 @@ import Article from "components/article/article";
 import { getStoredArticles, saveArticlesToLocalStorage } from "utils/articles";
 
 export default function Feed(): JSX.Element | null {
-  const queryClient = useQueryClient();
+  useQueryClient();
   let finalData;
   // get stored article, if none query Api for new ones
-  const queryFn = async () => await getArticles();
-  // const queryFn = async () => (await getStoredArticles()) || getArticles();
+  const queryFn = async () => (await getStoredArticles()) || getArticles();
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["default"],
     queryFn: () => queryFn(),
@@ -29,7 +28,7 @@ export default function Feed(): JSX.Element | null {
   }
 
   if (data) {
-    console.log("data", data);
+    // console.log("data", data);
     saveArticlesToLocalStorage(data.articles);
     finalData = data;
   }
