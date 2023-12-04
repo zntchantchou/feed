@@ -1,0 +1,36 @@
+Auth: 
+  ☐ Setup firebase auth sdk
+  ☐ Setup Bookmarks linked to a User 
+Recommandations:
+  ☐ User should be notified if they get a recommendation
+  ☐ User should be notified if they get a contact request
+Upvote:
+  ☐ Upvote Article
+Downvote:
+  ☐ Downvote article 
+Contacts:
+  ☐ Contact Request 
+  ☐ Search endpoint 
+Article: 
+Models:
+  ☐ Article
+    - author 
+    - source
+    - description
+    - url
+    - urlToImage
+  ☐ (Users on firebase)
+  ☐ ContactRequest
+    - From : User
+    - To : w w wd s a cw sw ww DSD W G TQW WQDQD FGBF GFGFG WE  WD Ersd e re 
+    - status : Awaiting (Accepted, Declined)
+  ☐ Upvotes
+    - user: Id
+    - article: Id
+  ☐ Downvote 
+    - user: Id
+    - article: Id
+  ☐ Recommendations
+  ☐ Bookmarks
+  ☐ Tags 
+  ☐ Searches

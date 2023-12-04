@@ -1,0 +1,42 @@
+
+.main {
+  display: grid;
+  grid-gap: 1.3rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  grid-template-rows: repeat(auto-fit, 17rem);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: calc( 100vw - 15rem );
+  padding: 2rem;
+  backdrop-filter: sepia(90%);
+  box-sizing: border-box;
+  background-color:lightgrey ;
+  /* background-image: url('./cardboard-texture.jpg'); */
+  background-image: url('../../../public/cardboard.jpg');
+  /* overflow: hidden; */
+}
+
+/* width */
+.main::-webkit-scrollbar {
+  margin-left: 10px;
+  cursor: pointer;
+  width: 7px;
+  background-color: orangered;
+}
+
+/* Track */
+.main::-webkit-scrollbar-track {
+  background-color: grey;
+  box-shadow: inset 0 0 5px grey;
+}
+
+/* Handle */
+.main::-webkit-scrollbar-thumb {
+  background-color: orangered; 
+}
+
+/* Handle on hover */
+.main::-webkit-scrollbar-thumb:hover {
+  background: orangered; 
+}
+

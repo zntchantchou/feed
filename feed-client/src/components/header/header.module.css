@@ -1,0 +1,7 @@
+.root {
+  height: 3rem;
+  width: 100%;
+  display: flex;
+  color: aliceblue;
+  background-color: #303030;
+}
