@@ -28,7 +28,6 @@ export default function Feed(): JSX.Element | null {
   }
 
   if (data) {
-    // console.log("data", data);
     saveArticlesToLocalStorage(data.articles);
     finalData = data;
   }

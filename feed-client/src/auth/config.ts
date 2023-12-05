@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
+  namespace: "feed",
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
@@ -11,6 +12,4 @@ const firebaseConfig = {
 
 console.log("Firebase config ------------- \n", firebaseConfig);
 // Initialize Firebase
-const intializeFirebase = () => initializeApp(firebaseConfig);
-
-export default intializeFirebase;
+export default firebaseConfig;

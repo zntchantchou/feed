@@ -1,5 +1,28 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 3rem);
+  overflow: hidden;
+  background-color: rgb(138, 162, 243);
+  box-sizing: content-box;
+}
+
+.content>div {
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -32,6 +55,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

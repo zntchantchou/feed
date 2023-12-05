@@ -1,17 +1,20 @@
-PAGES 
+VIEWS:
   ☐ Add not found page
-  ☐ Centralized routing
+  
+ROUTING:  
+  ☐ Centralized routing @started(23-12-05 12:02)
+  ☐ find auth guard mechanism in the router (data in router)
 
-UX 
+UX :
 ☐ Find visual cue to show article has already been upvoted
 
-Bookmarks
+Bookmarks:
   ☐ Get all bookmarks from API at application start 
   ☐ Create Bookmark page 
   ☐ Show date 
   ☐ Sort in youngest to oldest order
 
-  Save
+Save:
   ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
   ☐ save bookmarks via api
 

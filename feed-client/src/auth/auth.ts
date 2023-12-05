@@ -1,5 +1,7 @@
+import { FirebaseApp, initializeApp } from "firebase/app";
 import {
   Auth as FirebaseAuth,
+  initializeAuth,
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
@@ -7,6 +9,7 @@ import {
   UserCredential,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+import firebaseConfig from "auth/config";
 // create user
 // log user in
 // log user out () and redirect
@@ -19,7 +22,9 @@ class Auth {
   auth: FirebaseAuth;
 
   constructor() {
-    this.auth = getAuth();
+    console.log("AUTH CONSTRUCTOR");
+    const app = initializeApp(firebaseConfig);
+    this.auth = initializeAuth(app);
     this.handleAuthChanges();
   }
 
@@ -64,13 +69,15 @@ class Auth {
   }
 
   handleAuthChanges() {
+    console.log("HANDLE AUTH CHANGES", this.auth);
     onAuthStateChanged(
       this.auth,
       (event: any) => {
+        console.log("onAuthStateChange", event);
         // use to redirect and reset state on logout
-        if (!event) console.log("LOGGING OUT!", event);
-        console.log("onAuthStateChanged event", event);
-        console.log("His.Auth.CurrentUSER ", this.auth.currentUser);
+        if (!event) {
+          console.log("LOGGING OUT! ", event);
+        }
       },
       (event: any) => {
         console.log("onAuthStateChanged error", event);

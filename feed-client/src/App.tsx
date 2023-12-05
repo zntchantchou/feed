@@ -1,37 +1,43 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import "./App.css";
 import Layout from "./components/layout/layout";
 import Feed from "views/feed/feed";
-import initializeFirebase from "auth/config";
-import Auth from "auth/auth";
+import firebaseConfig from "auth/config";
+import Login from "views/login/login";
+
+const router = () =>
+  createBrowserRouter([
+    {
+      path: "*",
+      Component: Layout,
+      children: [
+        {
+          path: "",
+          Component: Feed,
+        },
+        {
+          path: "feed",
+          Component: Feed,
+        },
+      ],
+    },
+    {
+      path: "login",
+      Component: Login,
+    },
+  ]);
 
 function App() {
   const queryClient = new QueryClient();
-  initializeFirebase();
-  // Auth.logOut();
-  Auth.logIn();
-  console.log("isloggedIn => ", Auth.isLoggedIn());
+  console.log("firebaseconfgig", firebaseConfig);
 
   return (
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <div className="App">
-          <Layout>
-            <Routes>
-              <Route
-                path="*"
-                element={
-                  <div>
-                    <Feed />
-                  </div>
-                }
-              ></Route>
-            </Routes>
-          </Layout>
-        </div>
-      </QueryClientProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <div className="App">
+        <RouterProvider router={router()} />
+      </div>
+    </QueryClientProvider>
   );
 }
 
