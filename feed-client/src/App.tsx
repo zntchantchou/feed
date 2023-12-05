@@ -2,38 +2,28 @@ import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import router from "router/router";
-import { useEffect } from "react";
+import { useEffect, useContext, createContext } from "react";
 import auth from "auth/auth";
+import { User } from "firebase/auth";
+
+const AuthContext = createContext<User | null>(null);
 
 function App() {
-  const queryClient = new QueryClient();
-  // console.log("[APP] RENDER value", value);
   useEffect(() => {
-    console.log("IS LOGGED IN AT START ", auth.isLoggedIn());
-    if (!auth.isLoggedIn()) {
-      auth
-        .logIn()
-        .then(() =>
-          console.log(
-            "LOGIN RESPONSE ",
-            auth.getUserInfo(),
-            "\n isloggedin ",
-            auth.isLoggedIn()
-          )
-        )
-        .catch((err) => console.log("LOGIN ERROR ", err));
-    }
+    const unsubscribe = auth.auth.onAuthStateChanged((currentUser) => {
+      console.log("APP CURR", currentUser);
+    });
+    return unsubscribe;
   }, []);
-
-  useEffect(() => {
-    console.log("Is logged in", auth.isLoggedIn());
-  }, [auth.isLoggedIn()]);
+  const queryClient = new QueryClient();
 
   return (
     <>
       <QueryClientProvider client={queryClient}>
         <div className="App">
-          <RouterProvider router={router} />
+          <AuthContext.Provider value={null}>
+            <RouterProvider router={router} />
+          </AuthContext.Provider>
         </div>
       </QueryClientProvider>
     </>

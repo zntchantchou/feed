@@ -1,47 +1,65 @@
-import { initializeApp } from "firebase/app";
 import {
   Auth as FirebaseAuth,
-  initializeAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
   UserCredential,
   createUserWithEmailAndPassword,
   setPersistence,
-  browserSessionPersistence,
+  User,
+  reload,
+  browserLocalPersistence,
 } from "firebase/auth";
-import firebaseConfig from "auth/config";
+
+import { auth as firebaseAuth } from "auth/config";
 
 class Auth {
   token?: string | null = null;
   refreshToken?: string | null = null;
   uid?: string | null = null;
   email: string | null = null;
-  auth: FirebaseAuth;
-  instance?: typeof this | null = null;
+  auth: FirebaseAuth = firebaseAuth;
   storageKey: string = `firebase:authUser:${process.env.REACT_APP_FIREBASE_KEY}:[DEFAULT]`;
 
   constructor() {
     console.log("[AUTH] constructor");
-    const app = initializeApp(firebaseConfig);
-    this.auth = initializeAuth(app);
-    setPersistence(this.auth, browserSessionPersistence);
-    this.listenForAuthChanges();
+
+    setPersistence(this.auth, browserLocalPersistence);
+    // this.listenForAuthChanges();
   }
 
-  getUserFromStorage() {
-    sessionStorage.getItem(this.storageKey);
+  getStoredSession() {
+    const storedUser = this.getUserFromStorage();
+    if (storedUser) {
+      reload(storedUser)
+        .then((res) => console.log("reload res", res))
+        .then((err) => console.log("reload err", err));
+    }
+    // if (this.auth) {
+    //   this.auth.currentUser
+    //     ?.getIdToken()
+    //     .then((res) => console.log("getIdToken res", res))
+    //     .then((err) => console.log("getIdToken err", err));
+    // }
   }
 
-  async logIn(email = "alt.s1-eo4iqzwp@yopmail.com", password = "password") {
+  getUserFromStorage(): User | undefined {
+    const data = localStorage.getItem(this.storageKey);
+    console.log("getUserFromStorage", sessionStorage.getItem(this.storageKey));
+    if (data !== null && data !== undefined) {
+      return JSON.parse(data) as User;
+    }
+  }
+
+  async logIn(mail = "alt.s1-eo4iqzwp@yopmail.com", password = "password") {
     try {
       const res: UserCredential = await signInWithEmailAndPassword(
         this.auth,
-        email,
+        mail,
         password
       );
       console.log("[Login] MAPPING");
-      this.email = res?.user?.email || null;
+      // this.email = res?.user?.email || null;
       this.uid = res?.user?.uid || null;
       this.refreshToken = res?.user?.refreshToken || null;
       this.token = await res.user.getIdToken();
@@ -49,6 +67,10 @@ class Auth {
     } catch (e) {
       console.log("[logIn] err: ", e);
     }
+  }
+
+  get currentUser() {
+    return this.auth.currentUser;
   }
 
   getUserInfo() {
@@ -87,11 +109,12 @@ class Auth {
     console.log("listenForAuthChanges ...");
     onAuthStateChanged(
       this.auth,
-      (event: any) => {
-        console.log("onAuthStateChange");
+      (user) => {
+        console.log("onAuthStateChange", user);
         // use to redirect and reset state on logout
-        if (!event) {
-          console.log("NO event! ");
+        console.log("this.current ", this.currentUser);
+        if (!user) {
+          console.log("NO user! ", user);
         }
       },
       (event: any) => {
@@ -101,4 +124,4 @@ class Auth {
   }
 }
 
-export default Object.freeze(new Auth());
+export default new Auth();
