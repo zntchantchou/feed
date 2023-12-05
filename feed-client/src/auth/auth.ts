@@ -1,8 +1,7 @@
-import { FirebaseApp, initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import {
   Auth as FirebaseAuth,
   initializeAuth,
-  getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
@@ -10,9 +9,6 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import firebaseConfig from "auth/config";
-// create user
-// log user in
-// log user out () and redirect
 
 class Auth {
   token?: string;
@@ -22,10 +18,9 @@ class Auth {
   auth: FirebaseAuth;
 
   constructor() {
-    console.log("AUTH CONSTRUCTOR");
+    console.log("[AUTH] constructor");
     const app = initializeApp(firebaseConfig);
     this.auth = initializeAuth(app);
-    this.handleAuthChanges();
   }
 
   async logIn(email = "alt.s1-eo4iqzwp@yopmail.com", password = "password") {
@@ -42,7 +37,7 @@ class Auth {
       this.token = await res.user.getIdToken();
       return res;
     } catch (e) {
-      console.log("err: ", e);
+      console.log("[logIn] err: ", e);
     }
   }
 
@@ -55,7 +50,7 @@ class Auth {
   }
 
   async logOut() {
-    console.log("signOut");
+    console.log("[signOut]");
     try {
       await signOut(this.auth);
       console.log("Auth [logout]");
@@ -68,22 +63,22 @@ class Auth {
     return !!this.auth.currentUser;
   }
 
-  handleAuthChanges() {
-    console.log("HANDLE AUTH CHANGES", this.auth);
-    onAuthStateChanged(
-      this.auth,
-      (event: any) => {
-        console.log("onAuthStateChange", event);
-        // use to redirect and reset state on logout
-        if (!event) {
-          console.log("LOGGING OUT! ", event);
-        }
-      },
-      (event: any) => {
-        console.log("onAuthStateChanged error", event);
-      }
-    );
-  }
+  // handleAuthChanges() {
+  //   console.log("HANDLE AUTH CHANGES", this.auth);
+  //   onAuthStateChanged(
+  //     this.auth,
+  //     (event: any) => {
+  //       console.log("onAuthStateChange", event);
+  //       // use to redirect and reset state on logout
+  //       if (!event) {
+  //         console.log("LOGGING OUT! ", event);
+  //       }
+  //     },
+  //     (event: any) => {
+  //       console.log("onAuthStateChanged error", event);
+  //     }
+  //   );
+  // }
 }
 
 export default new Auth();
