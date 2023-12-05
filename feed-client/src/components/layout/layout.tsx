@@ -6,11 +6,10 @@ import Sidenav from "components/sidenav/sidenav";
 import styles from "./layout.module.css";
 
 function Layout() {
-  // check Authentication
   const navigate = useNavigate();
+
+  // check Authentication
   useEffect(() => {
-    console.log("Layout logged in ? ", Auth?.isLoggedIn());
-    console.log("LAYOUT IS LOGGED IN", Auth.isLoggedIn());
     if (!Auth.isLoggedIn()) navigate("/login");
   }, []);
 
