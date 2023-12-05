@@ -9,6 +9,8 @@ function Layout() {
   // check Authentication
   const navigate = useNavigate();
   useEffect(() => {
+    console.log("Layout logged in ? ", Auth?.isLoggedIn());
+    console.log("LAYOUT IS LOGGED IN", Auth.isLoggedIn());
     if (!Auth.isLoggedIn()) navigate("/login");
   }, []);
 
