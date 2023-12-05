@@ -1,13 +1,19 @@
+import { useEffect, useRef } from "react";
 import styles from "./login.module.css";
 import { ui, uiConfig } from "auth/firebase-ui";
 
 function Login() {
-  const rootId = "#firebaseui-auth-container";
-  ui.start(rootId, uiConfig);
-  <h1>Login page</h1>;
+  const ref = useRef(null);
+
+  useEffect(() => {
+    // Make sure root is already present in the dom before mounting
+    if (ref.current) ui.start(ref.current, uiConfig);
+  }, [ref?.current]);
+
   return (
-    <div id={rootId} className={styles.root}>
-      Login Page
+    <div id={styles.main}>
+      <h1>Login</h1>
+      <div id="firebaseui-root" ref={ref}></div>
     </div>
   );
 }
