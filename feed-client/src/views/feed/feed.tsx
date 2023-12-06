@@ -7,12 +7,11 @@ import { getStoredArticles, saveArticlesToLocalStorage } from "utils/articles";
 
 export default function Feed(): JSX.Element | null {
   useQueryClient();
-  let finalData;
   // get stored article, if none query Api for new ones
-  const queryFn = async () => (await getStoredArticles()) || getArticles();
+  const getFeedData = async () => (await getStoredArticles()) || getArticles();
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["default"],
-    queryFn: () => queryFn(),
+    queryFn: () => getFeedData(),
     retry: false,
     refetchInterval: undefined,
   });
@@ -29,12 +28,11 @@ export default function Feed(): JSX.Element | null {
 
   if (data) {
     saveArticlesToLocalStorage(data.articles);
-    finalData = data;
   }
 
-  if (!finalData.articles) return null;
+  if (!data.articles) return null;
 
-  const articles = finalData.articles
+  const articles = data.articles
     .filter((article: ArticleType) => !!article.urlToImage)
     .map((article: ArticleType) => (
       <Article article={article} key={article.title} />

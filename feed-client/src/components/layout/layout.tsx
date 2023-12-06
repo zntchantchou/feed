@@ -1,19 +1,21 @@
-import { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import AuthService from "auth/auth";
 import Header from "components/header/header";
 import Sidenav from "components/sidenav/sidenav";
 import styles from "./layout.module.css";
+import { AuthContext } from "App";
 
 function Layout() {
   const navigate = useNavigate();
   const [isAuthReady, setIsAuthReady] = useState<boolean>(false);
-
+  const currentUser = useContext(AuthContext);
   // check Authentication
   useEffect(() => {
     AuthService.isReady()
       .then(() => {
         if (!AuthService.auth.currentUser) {
+          console.log(" LAYOUT NAVIGATE ", AuthService.auth.currentUser);
           return navigate("/login");
         }
         setIsAuthReady(true);
@@ -21,17 +23,23 @@ function Layout() {
       .catch((e) => console.log("ready e ", e));
   }, []);
 
+  useEffect(() => {
+    console.log("Layout current user: ", currentUser);
+  }, [currentUser]);
+
   let content;
-  if (isAuthReady) {
+  if (isAuthReady && currentUser) {
     content = (
       <div className={styles.content}>
         <Outlet></Outlet>
         <Sidenav></Sidenav>
       </div>
     );
-  } else {
-    content = <div>Loading ...</div>;
+  } else if (isAuthReady && !currentUser) {
+    console.log("NAVIGATING");
+    return <Navigate to="/login" replace={true} />;
   }
+
   return (
     <div className={styles.root}>
       <Header></Header>

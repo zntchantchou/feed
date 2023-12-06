@@ -10,7 +10,7 @@ export const AuthContext = createContext<User | null>(null);
 
 function App() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-
+  const queryClient = new QueryClient();
   useEffect(() => {
     // AuthService.logOut()
     //   .then((r) => console.log("logged in"))
@@ -19,16 +19,15 @@ function App() {
     const unsubscribe = AuthService.auth.onAuthStateChanged((firebaseUser) => {
       console.log("APP Firebaseuser", firebaseUser);
       setCurrentUser(firebaseUser);
+      console.log("APP currentUser ", currentUser);
     });
 
     return unsubscribe;
   }, []);
 
-  // useEffect(() => {
-  //   console.log("APP currentuser ", currentUser);
-  // }, [currentUser]);
-
-  const queryClient = new QueryClient();
+  useEffect(() => {
+    console.log("APP currentuser 2 ", currentUser);
+  }, [currentUser]);
 
   return (
     <AuthContext.Provider value={currentUser}>

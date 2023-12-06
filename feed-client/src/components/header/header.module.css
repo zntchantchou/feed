@@ -5,11 +5,12 @@
   width: 100%;
   display: flex;
   color: aliceblue;
-  background-color: rgba(0, 0, 0, 0.481)
+  background-color: #303030;
 }
 
 .email {
   align-items: center;
   display: flex;
   height: 60%;
+  color: aliceblue;
 }

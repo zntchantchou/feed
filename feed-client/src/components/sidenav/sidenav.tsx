@@ -1,6 +1,7 @@
 import styles from "./sidenav.module.css";
 import { NavItem } from "../../types/sidenav";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
+import auth from "auth/auth";
 
 export default function Sidenav() {
   const items: NavItem[] = [
@@ -29,6 +30,11 @@ export default function Sidenav() {
       redirectTo: "recommended",
       icon: "bell",
     },
+    {
+      label: "contacts",
+      redirectTo: "contacts",
+      icon: "user",
+    },
   ];
 
   return (
@@ -43,18 +49,23 @@ export default function Sidenav() {
               alt={item.label}
               color="white"
             ></img>
-            <Link
-              to={item.redirectTo}
-              style={{
-                textDecoration: "none",
-                marginLeft: "1rem",
-              }}
-              className={styles.navLink}
-            >
+            <Link to={item.redirectTo} className={styles.navLink}>
               {item.label}
             </Link>
           </div>
         ))}
+        <div className={styles.navItem} key="logout">
+          <img src="./logout.svg" alt="logout" color="white"></img>
+          <div
+            className={styles.navLink}
+            onClick={async () => {
+              await auth.logOut();
+              redirect("/login");
+            }}
+          >
+            logout
+          </div>
+        </div>
       </div>
     </div>
   );
