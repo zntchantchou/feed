@@ -11,6 +11,7 @@
 
 #firebaseui-root {
   height: 5rem !important;
+  padding: .5rem 0rem;
 }
 
 #firebaseui-root ul {
@@ -18,9 +19,10 @@
 }
 
 .firebaseui-idp-button {
-  background-color: rgb(226, 98, 98) !important;
+  background-color: rgb(98, 226, 162) !important;
   border: none;
   border-radius: 3px;
+  width: 100% !important;
 }
 
 .firebaseui-idp-list {
@@ -30,4 +32,8 @@
 .firebaseui-card-content {
   display: flex !important;
   justify-content: center;
+}
+
+.firebaseui-card-content form {
+  width: 100% !important;
 }

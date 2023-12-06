@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
-import styles from "./login.module.css";
-import { ui, uiConfig } from "auth/firebase-ui";
 import "./firebase-ui.css";
+import styles from "./login.module.css";
+import { useEffect, useRef } from "react";
+import { ui, uiConfig } from "auth/firebase-ui";
+import LoginButton from "components/ui/loginButton/loginButton";
+import { joinClasses } from "utils/style";
 
 function Login() {
   const ref = useRef(null);
@@ -15,13 +17,23 @@ function Login() {
     <div className={styles.main}>
       <div className={styles.modal}>
         <div className={styles.title}> Login </div>
+
         <div id="firebaseui-root" ref={ref}></div>
+
         <hr />
-        <div> Signup with email and password</div>
+
+        <div className={joinClasses(styles.formGroup, styles.credentials)}>
+          <input placeholder="email" type="text" />
+          <input placeholder="password" type="password" />
+          {/* <div className={joinClasses(styles.formGroup, styles.controls)}> */}
+          <LoginButton label="log in" variant="default" />
+          <LoginButton label="sign up" variant="dark" />
+        </div>
+        {/* </div> */}
+        <div> </div>
       </div>
     </div>
   );
 }
 
 export default Login;
-// alt.va-50qp95q@yopmail.com
