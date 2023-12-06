@@ -1,11 +1,10 @@
-import { useContext, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./login.module.css";
 import { ui, uiConfig } from "auth/firebase-ui";
-import { AuthContext } from "App";
+import "./firebase-ui.css";
 
 function Login() {
   const ref = useRef(null);
-  const user = useContext(AuthContext);
 
   useEffect(() => {
     // Make sure root is already present in the dom before mounting
@@ -13,8 +12,13 @@ function Login() {
   }, [ref?.current]);
 
   return (
-    <div id={styles.main}>
-      <div id="firebaseui-root" ref={ref}></div>
+    <div className={styles.main}>
+      <div className={styles.modal}>
+        <div className={styles.title}> Login </div>
+        <div id="firebaseui-root" ref={ref}></div>
+        <hr />
+        <div> Signup with email and password</div>
+      </div>
     </div>
   );
 }

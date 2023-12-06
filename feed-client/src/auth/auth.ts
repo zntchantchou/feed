@@ -34,31 +34,6 @@ class Auth {
     }
   }
 
-  get currentUser() {
-    return this.auth.currentUser;
-  }
-
-  async isReady() {
-    return this.auth.authStateReady();
-  }
-
-  getUserInfo() {
-    return {
-      email: this.email,
-      uid: this.uid,
-      token: this.token,
-      refreshToken: this.refreshToken,
-    };
-  }
-
-  async createUser(email: string, password: string) {
-    try {
-      return await createUserWithEmailAndPassword(this.auth, email, password);
-    } catch (e) {
-      console.log("createUser error: ", e);
-    }
-  }
-
   async logOut() {
     console.log("[signOut]");
     try {
@@ -68,8 +43,20 @@ class Auth {
     }
   }
 
-  isLoggedIn(): boolean {
-    return !!this.auth.currentUser;
+  get currentUser() {
+    return this.auth.currentUser;
+  }
+
+  async isReady() {
+    return this.auth.authStateReady();
+  }
+
+  async createUserWithEmailAndPassword(email: string, password: string) {
+    try {
+      return await createUserWithEmailAndPassword(this.auth, email, password);
+    } catch (e) {
+      console.log("createUser error: ", e);
+    }
   }
 }
 
