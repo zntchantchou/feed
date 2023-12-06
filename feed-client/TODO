@@ -1,12 +1,18 @@
 VIEWS:
   ☐ Add not found page
+  ☐ Add login page @started(23-12-06 00:50)
+  ☐ Add error page
+  ☐ Add loading page
   
 ROUTING:  
-  ☐ Centralized routing @started(23-12-05 12:02)
-  ☐ find auth guard mechanism in the router (data in router)
+  ✔ Centralized routing @started(23-12-05 12:02) @done(23-12-05 23:30) @lasted(11h28m2s)
+  ☐ find auth guard mechanism in the router (data in router?)
 
 UX :
 ☐ Find visual cue to show article has already been upvoted
+
+Refacto: 
+  ☐ clean Auth module
 
 Bookmarks:
   ☐ Get all bookmarks from API at application start 

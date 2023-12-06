@@ -14,11 +14,10 @@ function Login() {
 
   return (
     <div id={styles.main}>
-      <h1>Login</h1>
-      <div>Current user is {user?.email} </div>
       <div id="firebaseui-root" ref={ref}></div>
     </div>
   );
 }
 
 export default Login;
+// alt.va-50qp95q@yopmail.com
