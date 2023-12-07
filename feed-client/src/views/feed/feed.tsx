@@ -38,5 +38,5 @@ export default function Feed(): JSX.Element | null {
       <Article article={article} key={article.title} />
     ));
 
-  return <div className={styles.main}> {articles} </div>;
+  return <div className={styles.main}>{articles}</div>;
 }

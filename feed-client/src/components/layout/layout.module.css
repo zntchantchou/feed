@@ -15,7 +15,17 @@
   box-sizing: content-box;
 }
 
-.content>div {
+.content>div:first-of-type {
+  padding: 1rem 5rem;
   box-sizing: border-box;
   overflow: auto;
+}
+
+@media screen and (max-width: 800px) {
+  .content>div:first-of-type {
+    padding: 1rem 1rem;
+    box-sizing: border-box;
+    overflow: auto;
+  }
+
 }

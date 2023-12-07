@@ -9,8 +9,6 @@
   box-sizing: border-box;
 }
 
-
-
 .default {
   background-color: orangered;
 }
@@ -20,12 +18,11 @@
 }
 
 .dark {
-  background-color: rgb(75, 75, 75);
+  background-color: rgba(0, 0, 0, 0.884);
 }
 
 .dark:hover {
-  background-color: rgba(0, 0, 0, 0.884);
-  color: orangered;
+  background-color: rgb(75, 75, 75);
 }
 
 .dark,

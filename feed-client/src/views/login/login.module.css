@@ -21,8 +21,15 @@
   background-color: #303030;
 }
 
+.brand {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 4rem;
+}
+
 .title {
-  font-size: 3rem;
+  font-size: 2.4rem;
   color: #fff;
 }
 

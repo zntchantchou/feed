@@ -15,6 +15,7 @@ function Login() {
 
   return (
     <div className={styles.main}>
+      <div className={styles.brand}>Feed</div>
       <div className={styles.modal}>
         <div className={styles.title}> Login </div>
 
@@ -25,12 +26,10 @@ function Login() {
         <div className={joinClasses(styles.formGroup, styles.credentials)}>
           <input placeholder="email" type="text" />
           <input placeholder="password" type="password" />
-          {/* <div className={joinClasses(styles.formGroup, styles.controls)}> */}
           <LoginButton label="log in" variant="default" />
           <LoginButton label="sign up" variant="dark" />
         </div>
-        {/* </div> */}
-        <div> </div>
+        <div></div>
       </div>
     </div>
   );

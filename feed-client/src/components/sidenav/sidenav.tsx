@@ -39,7 +39,7 @@ export default function Sidenav() {
 
   return (
     <div className={styles.root}>
-      <div className={styles.title}> My feed </div>
+      <div className={styles.title}> feed </div>
 
       <div className={styles.navItems}>
         {items.map((item) => (

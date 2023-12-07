@@ -1,8 +1,20 @@
 .firebaseui-idp-button {
   height: 4rem;
   cursor: pointer;
+  display: flex;
+  padding: 0px 25%;
+  justify-content: space-between;
+  align-items: center;
 }
 
+.firebaseui-idp-text {
+  height: 1rem !important;
+  font-size: 1rem;
+}
+
+.firebaseui-idp-text-short {
+  display: none;
+}
 
 .firebaseui-idp-button * {
   max-height: 3rem;

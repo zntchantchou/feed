@@ -5,6 +5,7 @@ import { User } from "firebase/auth";
 import router from "router/router";
 import AuthService from "auth/auth";
 import "./App.css";
+import auth from "auth/auth";
 
 export const AuthContext = createContext<User | null>(null);
 
@@ -13,9 +14,10 @@ function App() {
   const queryClient = new QueryClient();
 
   useEffect(() => {
-    const unsubscribe = AuthService.auth.onAuthStateChanged((firebaseUser) =>
-      setCurrentUser(firebaseUser)
-    );
+    const unsubscribe = AuthService.auth.onAuthStateChanged((firebaseUser) => {
+      firebaseUser?.getIdToken().then((token) => console.log("TOK ", token));
+      setCurrentUser(firebaseUser);
+    });
     return unsubscribe;
   }, []);
 
