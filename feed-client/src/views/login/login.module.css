@@ -10,6 +10,10 @@
   align-items: center;
 }
 
+.hr {
+  width: 100%;
+}
+
 .modal {
   box-sizing: border-box;
   padding: 1rem;

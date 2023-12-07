@@ -4,21 +4,39 @@ import authStyles from "components/autentication/authentication.module.css";
 import LoginButton from "components/ui/loginButton/loginButton";
 import { joinClasses } from "utils/style";
 import { useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { FirebaseError } from "firebase/app";
+import Auth from "auth/Auth";
 
 function Signup() {
   const navigate = useNavigate();
+  const emailRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const [authError, setAuthError] = useState<FirebaseError | null>(null);
+
   return (
     <div className={styles.root}>
-      <Authentication title="Sign up">
+      <Authentication title="Sign up" errorMessage={authError?.message}>
         <div
-          className={joinClasses(authStyles.formGroup, authStyles.credentials)}
-          style={{ marginTop: "4rem", height: "17rem" }}
+          className={joinClasses(
+            authStyles.formGroup,
+            authStyles.credentials,
+            styles.form
+          )}
         >
-          <input placeholder="email" type="text" />
-          <input placeholder="password" type="password" />
+          <input placeholder="email" type="text" ref={emailRef} />
+          <input placeholder="password" type="password" ref={passwordRef} />
           <LoginButton
-            onClick={(f) => {
-              console.log("[SIGN UP] click ");
+            onClick={async (f) => {
+              try {
+                await Auth.signUp(
+                  emailRef?.current?.value as string,
+                  passwordRef?.current?.value as string
+                );
+                return navigate("/feed");
+              } catch (e) {
+                setAuthError(e as FirebaseError);
+              }
             }}
             label="sign up"
             variant="default"

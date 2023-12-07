@@ -3,19 +3,17 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { useEffect, createContext, useState } from "react";
 import { User } from "firebase/auth";
 import router from "router/router";
-import AuthService from "auth/auth";
+import AuthService from "auth/Auth";
 import "./App.css";
-import auth from "auth/auth";
 
 export const AuthContext = createContext<User | null>(null);
 
 function App() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const queryClient = new QueryClient();
-  console.log("app");
   useEffect(() => {
     const unsubscribe = AuthService.auth.onAuthStateChanged((firebaseUser) => {
-      firebaseUser?.getIdToken().then((token) => console.log("TOK ", token));
+      console.log("[ONAUTHSTATECHANGE] currentUser", currentUser);
       setCurrentUser(firebaseUser);
     });
     return unsubscribe;

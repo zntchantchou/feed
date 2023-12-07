@@ -1,7 +1,7 @@
 import styles from "./sidenav.module.css";
 import { NavItem } from "../../types/sidenav";
 import { Link, redirect } from "react-router-dom";
-import auth from "auth/auth";
+import Auth from "auth/Auth";
 
 export default function Sidenav() {
   const items: NavItem[] = [
@@ -59,7 +59,7 @@ export default function Sidenav() {
           <div
             className={styles.navLink}
             onClick={async () => {
-              await auth.logOut();
+              await Auth.logOut();
               redirect("/login");
             }}
           >

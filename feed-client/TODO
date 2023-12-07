@@ -1,10 +1,14 @@
 VIEWS:
   ☐ Add not found page
   ✔ Add login page @started(23-12-06 00:50) @done(23-12-07 15:31) @lasted(1d14h41m3s)
-  ☐ Add signup page
+  ✔ Add signup page @done(23-12-07 20:53)
   ☐ Add error page
   ☐ Add loading page
   
+AUTH:
+  ☐ Add form validation to Login
+  ☐ Add form validation to Signup
+
 ROUTING:  
   ✔ Centralized routing @started(23-12-05 12:02) @done(23-12-05 23:30) @lasted(11h28m2s)
   ☐ find auth guard mechanism in the router (data in router?)
@@ -13,7 +17,7 @@ UX :
 ☐ Find visual cue to show article has already been upvoted
 
 Refacto: 
-  ☐ clean Auth module
+  ☐ clean Auth module @started(23-12-07 20:53)
 
 Bookmarks:
   ☐ Get all bookmarks from API at application start 

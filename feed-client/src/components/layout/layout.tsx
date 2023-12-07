@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import AuthService from "auth/auth";
+import AuthService from "auth/Auth";
 import Header from "components/header/header";
 import Sidenav from "components/sidenav/sidenav";
 import styles from "./layout.module.css";

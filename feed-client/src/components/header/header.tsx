@@ -1,10 +1,10 @@
 import styles from "./header.module.css";
-import auth from "auth/auth";
+import Auth from "auth/Auth";
 
 function Header() {
   return (
     <div className={styles.root}>
-      <div className={styles.email}>{auth.currentUser?.email}</div>
+      <div className={styles.email}>{Auth.currentUser?.email}</div>
     </div>
   );
 }
