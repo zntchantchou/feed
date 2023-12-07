@@ -1,5 +1,7 @@
-import { FirebaseError } from "firebase/app";
 import styles from "./authentication.module.css";
+import Auth from "auth/Auth";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface AuthenticationProps {
   children: JSX.Element;
@@ -12,6 +14,17 @@ function Authentication({
   title,
   errorMessage,
 }: AuthenticationProps) {
+  const navigate = useNavigate();
+
+  // redirect to feed if user is already logged in
+  useEffect(() => {
+    Auth.isReady().then(() => {
+      if (Auth.currentUser) {
+        navigate("/feed");
+      }
+    });
+  }, []);
+
   return (
     <div className={styles.root}>
       <div className={styles.main}>

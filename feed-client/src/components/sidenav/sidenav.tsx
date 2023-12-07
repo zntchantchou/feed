@@ -1,9 +1,10 @@
 import styles from "./sidenav.module.css";
 import { NavItem } from "../../types/sidenav";
-import { Link, redirect } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import Auth from "auth/Auth";
 
 export default function Sidenav() {
+  const navigate = useNavigate();
   const items: NavItem[] = [
     {
       label: "bookmarks",
@@ -60,7 +61,8 @@ export default function Sidenav() {
             className={styles.navLink}
             onClick={async () => {
               await Auth.logOut();
-              redirect("/login");
+              console.log("logout");
+              navigate("/login");
             }}
           >
             logout

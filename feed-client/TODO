@@ -11,8 +11,8 @@ AUTH:
 
 ROUTING:  
   ✔ Centralized routing @started(23-12-05 12:02) @done(23-12-05 23:30) @lasted(11h28m2s)
+  ☐ redirect user automatically if authenticated @started(23-12-07 22:17)
   ☐ find auth guard mechanism in the router (data in router?)
-
 UX :
 ☐ Find visual cue to show article has already been upvoted
 

@@ -11,8 +11,6 @@ import { auth as firebaseAuth } from "auth/config";
 class Auth {
   auth: FirebaseAuth = firebaseAuth;
 
-  constructor() {}
-
   async logIn(mail: string, password: string) {
     const res: UserCredential = await signInWithEmailAndPassword(
       this.auth,
@@ -42,6 +40,7 @@ class Auth {
   async getToken() {
     return this.auth?.currentUser?.getIdToken();
   }
+
   // Getters
 
   get currentUser() {
