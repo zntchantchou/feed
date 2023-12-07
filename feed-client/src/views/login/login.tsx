@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react";
 import { ui, uiConfig } from "auth/firebase-ui";
 import LoginButton from "components/ui/loginButton/loginButton";
 import { joinClasses } from "utils/style";
-
+import Authentication from "components/autentication/authentication";
+import authStyles from "components/autentication/authentication.module.css";
 function Login() {
   const ref = useRef(null);
 
@@ -15,22 +16,27 @@ function Login() {
 
   return (
     <div className={styles.main}>
-      <div className={styles.brand}>Feed</div>
-      <div className={styles.modal}>
-        <div className={styles.title}> Login </div>
+      <Authentication title="Log in">
+        <div
+          className={joinClasses(authStyles.formGroup, authStyles.credentials)}
+        >
+          <div id="firebaseui-root" ref={ref}></div>
 
-        <div id="firebaseui-root" ref={ref}></div>
+          <hr />
 
-        <hr />
-
-        <div className={joinClasses(styles.formGroup, styles.credentials)}>
-          <input placeholder="email" type="text" />
-          <input placeholder="password" type="password" />
-          <LoginButton label="log in" variant="default" />
-          <LoginButton label="sign up" variant="dark" />
+          <div
+            className={joinClasses(
+              authStyles.formGroup,
+              authStyles.credentials
+            )}
+          >
+            <input placeholder="email" type="text" />
+            <input placeholder="password" type="password" />
+            <LoginButton label="log in" variant="default" />
+            <LoginButton label="sign up" variant="dark" />
+          </div>
         </div>
-        <div></div>
-      </div>
+      </Authentication>
     </div>
   );
 }

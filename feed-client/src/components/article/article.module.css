@@ -9,7 +9,7 @@
   grid-column-end: auto;
   grid-column-start: auto;
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: 5px;
 }
 
 .article .img {
