@@ -33,6 +33,10 @@
   color: #fff;
 }
 
+.form {
+  height: 17rem;
+}
+
 .formGroup {
   padding: 1rem 0rem;
   display: flex;

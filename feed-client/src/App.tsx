@@ -12,7 +12,7 @@ export const AuthContext = createContext<User | null>(null);
 function App() {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const queryClient = new QueryClient();
-
+  console.log("app");
   useEffect(() => {
     const unsubscribe = AuthService.auth.onAuthStateChanged((firebaseUser) => {
       firebaseUser?.getIdToken().then((token) => console.log("TOK ", token));

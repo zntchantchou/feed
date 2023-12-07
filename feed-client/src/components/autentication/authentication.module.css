@@ -41,6 +41,7 @@
 }
 
 .formGroup {
+  box-sizing: border-box;
   border-radius: 3px;
   padding: 1rem 0rem;
   display: flex;
@@ -55,10 +56,6 @@
   border: none;
   background-color: rgb(218, 218, 218);
   outline: none;
-}
-
-.credentials {
-  height: 15rem;
 }
 
 .controls {
