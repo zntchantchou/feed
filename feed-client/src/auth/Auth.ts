@@ -29,12 +29,15 @@ class Auth {
     }
   }
 
-  async isReady() {
-    return this.auth.authStateReady();
-  }
-
   async signUp(email: string, password: string) {
     return createUserWithEmailAndPassword(this.auth, email, password);
+  }
+
+  /**
+   * @returns returns a promise that resolves immediately when the initial auth state is settled. When the promise resolves, the current user might be a valid user or null if the user signed out.
+   */
+  async waitForStart(): Promise<void> {
+    return this.auth.authStateReady();
   }
 
   async getToken() {

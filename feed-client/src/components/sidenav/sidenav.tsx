@@ -61,7 +61,6 @@ export default function Sidenav() {
             className={styles.navLink}
             onClick={async () => {
               await Auth.logOut();
-              console.log("logout");
               navigate("/login");
             }}
           >

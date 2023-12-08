@@ -9,7 +9,6 @@ function Article({ article }: { article: ArticleType }) {
   }
 
   const goToUrl = () => window.open(article.url, "_blank");
-  // console.log("ARTICLE URL TO IMG", article.urlToImage);
   return (
     <div className={styles.article}>
       <div className={styles.content} onClick={() => goToUrl()}>

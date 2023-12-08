@@ -18,10 +18,8 @@ function Authentication({
 
   // redirect to feed if user is already logged in
   useEffect(() => {
-    Auth.isReady().then(() => {
-      if (Auth.currentUser) {
-        navigate("/feed");
-      }
+    Auth.waitForStart().then(() => {
+      if (Auth.currentUser) navigate("/feed");
     });
   }, []);
 
