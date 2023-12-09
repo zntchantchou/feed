@@ -1,5 +1,5 @@
 Auth: 
-  ☐ Setup firebase auth sdk
+  ✔ Setup firebase auth sdk @done(23-12-08 14:20)
   ☐ Setup Bookmarks linked to a User 
 Recommandations:
   ☐ User should be notified if they get a recommendation
@@ -26,7 +26,15 @@ Models:
     - status : Awaiting (Accepted, Declined)
   ☐ Upvotes
     - user: Id
-    - article: Id
+    - article: IdBookmarks:
+    ☐ Get all bookmarks from API at application start
+    ☐ Create Bookmark page @started(23-12-08 14:19)
+    ☐ Show date 
+    ☐ Sort in youngest to oldest order
+    ☐ save bookmarks via api
+    ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
+  
+  
   ☐ Downvote 
     - user: Id
     - article: Id
@@ -34,3 +42,13 @@ Models:
   ☐ Bookmarks
   ☐ Tags 
   ☐ Searches
+
+  Bookmarks:
+    ☐ Get all bookmarks from API at application start
+    ☐ Create Bookmark page @started(23-12-08 14:19)
+    ☐ Show date 
+    ☐ Sort in youngest to oldest order
+    ☐ save bookmarks via api
+    ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
+  
+  

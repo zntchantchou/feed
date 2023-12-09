@@ -1,12 +1,37 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BookmarksModule } from './bookmarks/bookmarks.module';
 import { ConfigModule } from '@nestjs/config';
+import { TokenMiddleware } from './common/middleware/token/token.middleware';
+import { BookmarksController } from './bookmarks/bookmarks.controller';
+import { SequelizeModule } from '@nestjs/sequelize';
+import Article from 'db/models/Article';
 
 @Module({
-  imports: [BookmarksModule, ConfigModule.forRoot()],
+  imports: [
+    BookmarksModule,
+    ConfigModule.forRoot(),
+    SequelizeModule.forRoot({
+      port: 8002,
+      host: process.env.DB_HOST,
+      database: process.env.DB_NAME,
+      password: process.env.DB_PASSWORD,
+      username: process.env.DB_USER,
+      autoLoadModels: true,
+      synchronize: true,
+      dialect: 'postgres',
+      models: [Article],
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(TokenMiddleware)
+      // all routes are authenticated
+      .forRoutes(AppController, BookmarksController);
+  }
+}

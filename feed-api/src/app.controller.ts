@@ -1,12 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Request } from '@nestjs/common';
+import {} from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get('check')
+  @HttpCode(HttpStatus.OK)
+  async checkAuth(@Request() req: any) {
+    return { check: 'ok' };
   }
 }

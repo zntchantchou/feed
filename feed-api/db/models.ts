@@ -1,8 +1,7 @@
-import connection from './connection';
-import Bookmark from './models/Bookmark';
+import Article from './models/Article';
 
 const models = {
-  Bookmark,
+  Article,
 };
 
 // create tables if necessary
