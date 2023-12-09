@@ -47,7 +47,9 @@ Models:
     ✔ CreateBookmark method @done(23-12-09 06:23)
     ✔ Add unique to bookmark model => userId+ArticleId @done(23-12-09 07:56)
     ✔ GetBookmarks method @done(23-12-09 09:41)
-    ☐ DeleteBookmark method
+    ✔ DeleteBookmark method @done(23-12-09 11:42)
+    ☐ Get bookmarks from feed too
+    ☐ use query to bookmarks to let each article know if it is bookmarked 
     ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
   
   Logging:
