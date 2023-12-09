@@ -1,6 +1,6 @@
 Auth: 
   ✔ Setup firebase auth sdk @done(23-12-08 14:20)
-  ☐ Setup Bookmarks linked to a User 
+  ✔ Setup Bookmarks linked to a User @done(23-12-09 06:29)
 Recommandations:
   ☐ User should be notified if they get a recommendation
   ☐ User should be notified if they get a contact request
@@ -22,7 +22,7 @@ Models:
   ☐ (Users on firebase)
   ☐ ContactRequest
     - From : User
-    - To : w w wd s a cw sw ww DSD W G TQW WQDQD FGBF GFGFG WE  WD Ersd e re 
+    - To : User
     - status : Awaiting (Accepted, Declined)
   ☐ Upvotes
     - user: Id
@@ -34,21 +34,22 @@ Models:
     ☐ save bookmarks via api
     ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
   
-  
   ☐ Downvote 
     - user: Id
     - article: Id
   ☐ Recommendations
-  ☐ Bookmarks
   ☐ Tags 
   ☐ Searches
 
   Bookmarks:
-    ☐ Get all bookmarks from API at application start
-    ☐ Create Bookmark page @started(23-12-08 14:19)
-    ☐ Show date 
-    ☐ Sort in youngest to oldest order
-    ☐ save bookmarks via api
+    ✔ Create Model @done(23-12-09 06:23)
+    ✔ Link to article @done(23-12-09 06:23)
+    ✔ CreateBookmark method @done(23-12-09 06:23)
+    ✔ Add unique to bookmark model => userId+ArticleId @done(23-12-09 07:56)
+    ✔ GetBookmarks method @done(23-12-09 09:41)
+    ☐ DeleteBookmark method
     ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
   
-  
+  Logging:
+    ☐ file logger
+    ☐ dev logger

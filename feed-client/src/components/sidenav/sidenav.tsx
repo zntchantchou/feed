@@ -9,7 +9,7 @@ export default function Sidenav() {
     {
       label: "bookmarks",
       redirectTo: "bookmarks",
-      icon: "folder",
+      icon: "bookmark",
     },
     {
       label: "tags",

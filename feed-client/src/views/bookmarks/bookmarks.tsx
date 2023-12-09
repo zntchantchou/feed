@@ -1,8 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
+import FeedLayout from "components/feedLayout/feedLayout";
 import { getBookmarks } from "queries/bookmarks";
 
 export default function Bookmarks() {
-  const { isPending, isError, data, error } = useQuery({
+  const {
+    isPending,
+    isError,
+    data: articles,
+    error,
+  } = useQuery({
     queryKey: ["bookmarks"],
     queryFn: () => getBookmarks(),
   });
@@ -13,9 +19,9 @@ export default function Bookmarks() {
   if (isPending) {
     return <div>loading</div>;
   }
-  if (data) {
-    console.log("data", data);
-    return <div>data</div>;
+  if (articles) {
+    console.log("Bookmarks ", articles);
+    return <FeedLayout articles={articles} />;
   }
   return <div>Bookmarks</div>;
 }

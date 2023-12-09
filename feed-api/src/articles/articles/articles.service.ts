@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Optional } from 'sequelize';
 import { ArticleDto } from 'src/bookmarks/dto/article.dto';
 import Article from 'db/models/Article';
-import utils from './utils';
+import { getUid } from './utils';
 import { Op } from 'sequelize';
 
 @Injectable()
@@ -15,9 +15,7 @@ export class ArticlesService {
 
   async create(article: ArticleDto) {
     console.log('CREATE IN ARTICLE SERVICE BEFORE ', article);
-    const created = await this.articleModel.create(
-      article as Optional<any, any>,
-    );
+    const created = await this.articleModel.create({ ...article });
     console.log('CREATED ', created);
     return created;
   }
@@ -27,7 +25,7 @@ export class ArticlesService {
    * an article is not linked to a user but bookmarks are linked to a user and an article
    */
   async findByArticle(article: ArticleDto): Promise<Article | null> {
-    const newUid = utils.getUid(article);
+    const newUid = getUid(article);
     const existing = await this.articleModel.findOne({
       where: { uid: { [Op.like]: newUid } },
     });

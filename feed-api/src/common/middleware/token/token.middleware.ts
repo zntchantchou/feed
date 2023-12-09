@@ -15,7 +15,7 @@ export class TokenMiddleware implements NestMiddleware {
         req.headers.token as string,
       );
       // @ts-ignore
-      req.uid = decodedToken?.uid;
+      req.userId = decodedToken?.uid;
       console.log('[TokenMiddleware] decoded token: ', decodedToken);
       console.log('[TokenMiddleware] decoded uid: ', decodedToken.uid);
       next();

@@ -2,7 +2,11 @@ import { Article as ArticleType } from "../../types/article";
 import ArticleControls from "./articleControls/articleControls";
 import styles from "./article.module.css";
 
-function Article({ article }: { article: ArticleType }) {
+interface ArticleProps {
+  article: ArticleType;
+}
+
+function Article({ article }: ArticleProps) {
   let { title } = article;
   if (article.title.length > 130) {
     title = `${title.slice(0, 130)}...`;

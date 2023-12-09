@@ -6,17 +6,20 @@ import {
   AllowNull,
   ForeignKey,
   BelongsTo,
+  Index,
 } from 'sequelize-typescript';
 import Article from './Article';
 
 @Table
 export class Bookmark extends Model {
   @AllowNull(false)
+  @Index({ name: 'userId-articleId', unique: true })
   @ForeignKey(() => Article)
   @Column
   articleId: string;
 
   @AllowNull(false)
+  @Index({ name: 'userId-articleId', unique: true })
   @Column({
     type: DataTypes.STRING,
   })

@@ -14,4 +14,4 @@ export const getDefaultHeaders = async (): Promise<Headers> => {
 export const POST = "POST";
 export const GET = "GET";
 export const PUT = "PUT";
-export const DELETE = "POST";
+export const DELETE = "DELETE";

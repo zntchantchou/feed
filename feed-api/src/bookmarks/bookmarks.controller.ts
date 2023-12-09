@@ -3,31 +3,46 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Post,
   Req,
 } from '@nestjs/common';
 import { ArticlesService } from 'src/articles/articles/articles.service';
 import { ArticleDto } from './dto/article.dto';
-import auth from 'auth/firebase';
+import { BookmarkService } from './bookmarks.service';
 
 @Controller('bookmarks')
 export class BookmarksController {
-  constructor(private readonly articleService: ArticlesService) {}
+  constructor(
+    private readonly bookmarkService: BookmarkService,
+    private readonly articleService: ArticlesService,
+  ) {}
+
+  @Get()
+  async getBookmarks(@Req() req) {
+    try {
+      console.log('[get bookmarks] userId => ', req.userId);
+      return this.bookmarkService.getBookmarkedArticles(req.userId);
+    } catch (e) {
+      console.log('[getUserBookmarks] Error : ', e);
+    }
+  }
 
   @Post()
   async createBookmark(@Body() article: ArticleDto, @Req() req) {
     try {
-      console.log('[BookmarksController] CREATE BOOKMARKS ----  \n');
-      console.log('[BookmarksController] articleDto ----  \n', article);
-      console.log('[BookmarksController] articleDto UID ----  \n', req.uid);
-      const existingArticle = await this.articleService.findByArticle(article);
+      let savedArticle = await this.articleService.findByArticle(article);
       console.log('ARTICLE EXISTS');
-      if (!existingArticle) {
-        const savedArticle = await this.articleService.create(article);
+      if (!savedArticle) {
+        savedArticle = await this.articleService.create(article);
         console.log('NEWLY SAVED ARTICLE \n', savedArticle);
       }
-
-      return 'ok';
+      const savedBookmark = await this.bookmarkService.create({
+        userId: req?.userId,
+        articleId: savedArticle.uid,
+      });
+      console.log('SavedBookmark \n', savedBookmark);
+      return 'success';
     } catch (e) {
       if (e?.errors) {
         const err = e?.errors[0];
@@ -41,14 +56,15 @@ export class BookmarksController {
     }
   }
 
-  // @Post()
-  // async getBookmarks() {
-  //   return [];
-  // }
-
   @Delete()
-  deleteBookmark() {
-    console.log('[BookmarksController] DELETE BOOKMARKS ----  \n');
-    return false;
+  async deleteBookmark(@Body() article: ArticleDto, @Req() req) {
+    try {
+      console.log('[BookmarksController] DELETE BOOKMARKS ----  \n');
+      console.log(article, req.userId);
+      await this.bookmarkService.deleteBookmark(article, req.userId);
+      return 'success';
+    } catch (e) {
+      return 'error';
+    }
   }
 }

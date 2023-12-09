@@ -4,7 +4,11 @@ VIEWS:
   ✔ Add signup page @done(23-12-07 20:53)
   ☐ Add error page
   ☐ Add loading page
+  ☐ Add search page
   
+Search :
+  ☐ Add searchbar with autocomplete on each keystroke for contact search 
+    
 AUTH:
   ☐ Add form validation to Login
   ☐ Add form validation to Signup
@@ -20,12 +24,12 @@ Refacto:
   ✔ clean Auth module @started(23-12-07 20:53) @done(23-12-08 02:28) @lasted(5h35m43s)
 
 Bookmarks:
-  ☐ Get all bookmarks from API at application start
-  ☐ Create Bookmark page @started(23-12-08 14:19)
-  ☐ Show date 
-  ☐ Sort in youngest to oldest order
-  ☐ implement save bookmarks 
-  ☐ implement delete bookmark
+  ✔ Create Bookmark page @started(23-12-08 14:19) @done(23-12-09 10:02) @lasted(19h43m51s)
+  ✔ Get all bookmarks at mount @done(23-12-09 10:02)
+  ✔ Sort in youngest to oldest order @done(23-12-09 10:02)
+  ✔ implement save bookmarks @done(23-12-09 10:02)
+  ✔ implement delete bookmark @done(23-12-09 11:10)
+  ☐ Show bookmarked date 
   ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
  
 
