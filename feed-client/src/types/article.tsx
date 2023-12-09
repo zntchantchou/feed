@@ -7,6 +7,7 @@ export type Article = {
   title: string;
   url: string;
   urlToImage?: string;
+  isBookmarked?: boolean;
 };
 
 export type StoredArticles = {

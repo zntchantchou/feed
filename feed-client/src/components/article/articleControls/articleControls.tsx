@@ -48,13 +48,13 @@ export default function ArticleControls({ article }: ArticleControlsProps) {
 
   useEffect(() => {
     if (location?.pathname === "/bookmarks") {
-      console.log("SET VARIANT bookmark");
+      // console.log("SET VARIANT bookmark");
       if (variant !== VARIANTS.bookmark) setVariant(VARIANTS.bookmark);
     } else {
-      console.log("SET VARIANT article");
+      // console.log("SET VARIANT article");
       if (variant !== VARIANTS.article) setVariant(VARIANTS.article);
     }
-    console.log("LOCALTION ", location);
+    // console.log("LOCALTION ", location);
   }, [location]);
 
   return (
