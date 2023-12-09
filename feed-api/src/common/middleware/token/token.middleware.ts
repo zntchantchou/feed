@@ -14,8 +14,10 @@ export class TokenMiddleware implements NestMiddleware {
       const decodedToken = await auth.verifyIdToken(
         req.headers.token as string,
       );
-
+      // @ts-ignore
+      req.uid = decodedToken?.uid;
       console.log('[TokenMiddleware] decoded token: ', decodedToken);
+      console.log('[TokenMiddleware] decoded uid: ', decodedToken.uid);
       next();
     } catch (e) {
       console.log('HEADERS AT ERROR: ', req.headers);

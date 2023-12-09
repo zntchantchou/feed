@@ -1,40 +1,50 @@
-import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Post,
+  Req,
+} from '@nestjs/common';
 import { ArticlesService } from 'src/articles/articles/articles.service';
+import { ArticleDto } from './dto/article.dto';
+import auth from 'auth/firebase';
 
 @Controller('bookmarks')
 export class BookmarksController {
-  constructor(private articleService: ArticlesService) {}
+  constructor(private readonly articleService: ArticlesService) {}
 
   @Post()
-  async createBookmark(@Body() article: ArticleDto) {
+  async createBookmark(@Body() article: ArticleDto, @Req() req) {
     try {
       console.log('[BookmarksController] CREATE BOOKMARKS ----  \n');
-      const article: ArticleDto = {
-        source: 'source',
-        title: 'tipe',
-        description: 'description',
-        urlToImage: 'urlToImage',
-        url: 'url',
-        publishedAt: '2023-12-08 23:15:03.306 +0100',
-        content: 'content',
-      };
-      return await this.articleService.create(article);
-    } catch (e) {
-      console.log('getBookmarksByUserId \n', e);
-      if (e?.errors) {
-        const errorMsg = e?.errors[0]?.message;
-        console.log('[getBookmarksByUserId] validation error: \n', errorMsg);
-        return { error: errorMsg };
+      console.log('[BookmarksController] articleDto ----  \n', article);
+      console.log('[BookmarksController] articleDto UID ----  \n', req.uid);
+      const existingArticle = await this.articleService.findByArticle(article);
+      console.log('ARTICLE EXISTS');
+      if (!existingArticle) {
+        const savedArticle = await this.articleService.create(article);
+        console.log('NEWLY SAVED ARTICLE \n', savedArticle);
       }
 
-      return { error: e };
+      return 'ok';
+    } catch (e) {
+      if (e?.errors) {
+        const err = e?.errors[0];
+        const errorMsg = err?.message;
+        console.log('[getBookmarksByUserId] validation error: \n', err);
+        console.log('[getBookmarksByUserId] validation error: \n', errorMsg);
+      } else {
+        console.log('getBookmarksByUserId \n', e);
+      }
+      throw new BadRequestException(e);
     }
   }
 
-  @Post()
-  async getBookmarks() {
-    return [];
-  }
+  // @Post()
+  // async getBookmarks() {
+  //   return [];
+  // }
 
   @Delete()
   deleteBookmark() {

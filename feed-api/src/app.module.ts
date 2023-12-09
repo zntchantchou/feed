@@ -7,6 +7,7 @@ import { TokenMiddleware } from './common/middleware/token/token.middleware';
 import { BookmarksController } from './bookmarks/bookmarks.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import Article from 'db/models/Article';
+import Bookmark from 'db/models/Bookmark';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import Article from 'db/models/Article';
       autoLoadModels: true,
       synchronize: true,
       dialect: 'postgres',
-      models: [Article],
+      models: [Article, Bookmark],
     }),
   ],
   controllers: [AppController],

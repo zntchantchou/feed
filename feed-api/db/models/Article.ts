@@ -5,11 +5,15 @@ import {
   Table,
   AllowNull,
   BeforeValidate,
+  HasMany,
+  PrimaryKey,
 } from 'sequelize-typescript';
+import Bookmark from './Bookmark';
 
 @Table
 export class Article extends Model {
   @AllowNull(false)
+  @PrimaryKey
   @Column({
     type: DataTypes.STRING,
     unique: true,
@@ -55,6 +59,10 @@ export class Article extends Model {
   })
   content: string;
 
+  @HasMany(() => Bookmark)
+  bookmarks: Bookmark[];
+
+  // creates a unique key to enforce uniqueness
   @BeforeValidate
   static setUid(article: Article) {
     const date = new Date(article.publishedAt)
