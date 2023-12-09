@@ -17,18 +17,17 @@ UX :
 ☐ Find visual cue to show article has already been upvoted
 
 Refacto: 
-  ☐ clean Auth module @started(23-12-07 20:53)
+  ✔ clean Auth module @started(23-12-07 20:53) @done(23-12-08 02:28) @lasted(5h35m43s)
 
 Bookmarks:
-  ☐ Get all bookmarks from API at application start 
-  ☐ Create Bookmark page 
+  ☐ Get all bookmarks from API at application start
+  ☐ Create Bookmark page @started(23-12-08 14:19)
   ☐ Show date 
   ☐ Sort in youngest to oldest order
-
-Save:
+  ☐ implement save bookmarks 
+  ☐ implement delete bookmark
   ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
-  ☐ save bookmarks via api
-
+ 
 
 
   

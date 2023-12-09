@@ -3,7 +3,7 @@ export type Article = {
   content?: string;
   description: string;
   publishedAt: string;
-  source: string;
+  source?: { name?: string; id?: string };
   title: string;
   url: string;
   urlToImage?: string;

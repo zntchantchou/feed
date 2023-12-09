@@ -19,7 +19,7 @@ function Article({ article }: { article: ArticleType }) {
           className={styles.img}
         ></img>
       </div>
-      <ArticleControls></ArticleControls>
+      <ArticleControls article={article}></ArticleControls>
     </div>
   );
 }

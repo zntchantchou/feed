@@ -4,6 +4,7 @@ import { getArticles } from "queries/articles";
 import { Article as ArticleType } from "types/article";
 import Article from "components/article/article";
 import { getStoredArticles, saveArticlesToLocalStorage } from "utils/articles";
+import FeedLayout from "components/feedLayout/feedLayout";
 
 export default function Feed(): JSX.Element | null {
   useQueryClient();
@@ -32,11 +33,5 @@ export default function Feed(): JSX.Element | null {
 
   if (!data.articles) return null;
 
-  const articles = data.articles
-    .filter((article: ArticleType) => !!article.urlToImage)
-    .map((article: ArticleType) => (
-      <Article article={article} key={article.title} />
-    ));
-
-  return <div className={styles.main}>{articles}</div>;
+  return <FeedLayout articles={data.articles} />;
 }

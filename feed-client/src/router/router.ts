@@ -3,6 +3,7 @@ import Layout from "components/layout/layout";
 import Feed from "views/feed/feed";
 import Login from "views/login/login";
 import Signup from "views/signup/signup";
+import Bookmarks from "views/bookmarks/bookmarks";
 
 export default createBrowserRouter([
   {
@@ -24,6 +25,10 @@ export default createBrowserRouter([
       {
         path: "feed",
         Component: Feed,
+      },
+      {
+        path: "bookmarks",
+        Component: Bookmarks,
       },
     ],
   },
