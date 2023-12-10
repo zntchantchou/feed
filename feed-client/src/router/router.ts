@@ -4,14 +4,15 @@ import Feed from "views/feed/feed";
 import Login from "views/login/login";
 import Signup from "views/signup/signup";
 import Bookmarks from "views/bookmarks/bookmarks";
+import { RouteNames } from "./routes";
 
 export default createBrowserRouter([
   {
-    path: "login",
+    path: RouteNames.login,
     Component: Login,
   },
   {
-    path: "signup",
+    path: RouteNames.signup,
     Component: Signup,
   },
   {
@@ -23,11 +24,11 @@ export default createBrowserRouter([
         Component: Feed,
       },
       {
-        path: "feed",
+        path: RouteNames.feed,
         Component: Feed,
       },
       {
-        path: "bookmarks",
+        path: RouteNames.bookmarks,
         Component: Bookmarks,
       },
     ],

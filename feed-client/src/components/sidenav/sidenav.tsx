@@ -1,40 +1,42 @@
 import styles from "./sidenav.module.css";
 import { NavItem } from "../../types/sidenav";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Auth from "auth/Auth";
+import Icon, { IconNamesEnum } from "components/icon/icon";
+import { RouteNames } from "router/routes";
 
 export default function Sidenav() {
   const navigate = useNavigate();
   const items: NavItem[] = [
     {
       label: "bookmarks",
-      redirectTo: "bookmarks",
-      icon: "bookmark",
+      redirectTo: RouteNames.bookmarks,
+      iconName: IconNamesEnum.bookmark,
     },
     {
       label: "tags",
-      redirectTo: "tags",
-      icon: "flag",
+      redirectTo: RouteNames.tags,
+      iconName: IconNamesEnum.flag,
     },
     {
       label: "search",
-      redirectTo: "search",
-      icon: "search",
+      redirectTo: RouteNames.search,
+      iconName: IconNamesEnum.search,
     },
     {
       label: "most upvoted",
-      redirectTo: "most-upvoted",
-      icon: "trending-up",
+      redirectTo: RouteNames.mostUpvoted,
+      iconName: IconNamesEnum.trending,
     },
     {
       label: "recommended",
-      redirectTo: "recommended",
-      icon: "bell",
+      redirectTo: RouteNames.recommended,
+      iconName: IconNamesEnum.bell,
     },
     {
       label: "contacts",
-      redirectTo: "contacts",
-      icon: "user",
+      redirectTo: RouteNames.contacts,
+      iconName: IconNamesEnum.user,
     },
   ];
 
@@ -44,19 +46,20 @@ export default function Sidenav() {
 
       <div className={styles.navItems}>
         {items.map((item) => (
-          <div className={styles.navItem} key={item.label}>
-            <img
-              src={"./" + item.icon + ".svg"}
-              alt={item.label}
-              color="white"
-            ></img>
-            <Link to={item.redirectTo} className={styles.navLink}>
-              {item.label}
-            </Link>
+          <div
+            className={styles.navItem}
+            key={item.label}
+            onClick={async () => {
+              await Auth.logOut();
+              navigate(item.redirectTo);
+            }}
+          >
+            <Icon name={item.iconName} fill="#303030" stroke="#fff" />
+            <div className={styles.navLink}>{item.label}</div>
           </div>
         ))}
         <div className={styles.navItem} key="logout">
-          <img src="./logout.svg" alt="logout" color="white"></img>
+          <Icon name={IconNamesEnum.logout} />
           <div
             className={styles.navLink}
             onClick={async () => {

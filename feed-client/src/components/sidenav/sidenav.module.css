@@ -38,10 +38,6 @@
   justify-content: flex-start;
 }
 
-.navItem img {
-  height: 1rem;
-}
-
 .navLink {
   text-decoration: none;
   margin-left: 1rem;
@@ -49,11 +45,12 @@
 
 }
 
-.navLink:hover {
-  color: orangered;
-  font-size: .9rem;
-  opacity: 0.9;
+.navItem:hover svg {
+  stroke: orangered;
+}
 
+.navItem:hover .navLink {
+  color: orangered;
 }
 
 .navItems {
