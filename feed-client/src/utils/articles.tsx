@@ -9,7 +9,7 @@ export function saveArticlesToLocalStorage(articles: Article[]): void {
   localStorage.setItem("data", JSON.stringify(updatedArticles));
 }
 
-export async function getStoredArticles(): Promise<StoredArticles | null> {
+export async function getStoredArticles(): Promise<Article[] | null> {
   const articles = localStorage.getItem("data");
   if (articles) {
     const json = JSON.parse(articles) as StoredArticles;
@@ -20,7 +20,7 @@ export async function getStoredArticles(): Promise<StoredArticles | null> {
       return null;
     }
   }
-  return articles ? JSON.parse(articles) : null;
+  return articles ? JSON.parse(articles)?.articles : null;
 }
 
 export const getUid = (article: Article) => {

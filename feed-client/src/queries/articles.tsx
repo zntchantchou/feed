@@ -1,3 +1,5 @@
+import { Article } from "types/article";
+
 const { REACT_APP_NEWS_KEY: apiKey, REACT_APP_NEWS_URL: apiUrl } = process.env;
 
 const DEFAULT_COUNTRY = "us";
@@ -9,5 +11,5 @@ export const getArticles = async () => {
   console.log("url", url);
   const result = await fetch(url);
   const results = await result.json();
-  return results;
+  return results as Article[];
 };

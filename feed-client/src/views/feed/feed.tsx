@@ -1,8 +1,7 @@
 import styles from "./feed.module.css";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getArticles } from "queries/articles";
-import { Article as ArticleType, StoredArticles } from "types/article";
-import Article from "components/article/article";
+import { Article as NewsArticle, StoredArticles } from "types/article";
 import {
   getStoredArticles,
   getUid,
@@ -13,20 +12,20 @@ import { getBookmarks } from "queries/bookmarks";
 import { useEffect, useState } from "react";
 
 export default function Feed(): JSX.Element | null {
-  // useQueryClient();
   // get stored article, if none query Api for new ones
-  const getFeedData = async () => (await getStoredArticles()) || getArticles();
-  const [updatedFeedData, setUpdatedFeedData] =
-    useState<StoredArticles | null>();
+  const getNewsArticles = async () =>
+    (await getStoredArticles()) || getArticles();
+  const [feedArticles, setFeedArticles] = useState<NewsArticle[] | null>();
+  useState<StoredArticles | null>();
 
   const {
     isLoading,
     isError,
-    data: feedData,
+    data: newsApiArticles,
     error,
   } = useQuery({
     queryKey: ["default"],
-    queryFn: () => getFeedData(),
+    queryFn: () => getNewsArticles(),
     retry: false,
     refetchInterval: undefined,
   });
@@ -41,32 +40,32 @@ export default function Feed(): JSX.Element | null {
     queryFn: () => getBookmarks(),
   });
 
-  useEffect(() => {
-    console.log("feed + book");
-    if (feedData && bookmarks) {
-      const articleIds: string[] = bookmarks.map(getUid);
-      if (articleIds.length > 0) {
-        const updatedData = {
-          ...feedData,
-          articles: feedData.articles.map(
-            (article: ArticleType): ArticleType => {
-              return {
-                ...article,
-                isBookmarked: articleIds.includes(getUid(article)),
-              };
-            }
-          ),
-        };
-        setUpdatedFeedData(updatedData);
-      } else {
-        setUpdatedFeedData(feedData);
-      }
-    }
-  }, [bookmarks, feedData]);
+  const getUpdatedFeedArticles = (
+    articles: NewsArticle[]
+  ): NewsArticle[] | null => {
+    const articleIds: string[] = bookmarks.map(getUid);
+    const updatedArticles = newsApiArticles?.map(
+      (article: NewsArticle): NewsArticle => ({
+        ...article,
+        isBookmarked: articleIds.includes(getUid(article)),
+      })
+    );
+    return updatedArticles || null;
+  };
 
   useEffect(() => {
-    console.log("UPDATED FEED DATA ", updatedFeedData);
-  }, [updatedFeedData]);
+    console.log("feed + book");
+    if (newsApiArticles && bookmarks) {
+      console.log("BOOKMARKS + NEWSAPI ARTICLES ");
+      console.log(bookmarks, feedArticles);
+      const updateNewsArticles = getUpdatedFeedArticles(newsApiArticles);
+      setFeedArticles(updateNewsArticles);
+    }
+  }, [bookmarks, newsApiArticles]);
+
+  useEffect(() => {
+    console.log("UPDATED FEED ARTICLES => ", feedArticles);
+  }, [feedArticles]);
 
   if (isLoading || isBookmarksPending) {
     console.log("isLoading", isLoading);
@@ -78,11 +77,11 @@ export default function Feed(): JSX.Element | null {
     return <div> Error ....</div>;
   }
 
-  if (!updatedFeedData?.articles) return null;
+  if (!feedArticles) return null;
 
-  if (updatedFeedData) {
-    saveArticlesToLocalStorage(updatedFeedData.articles);
+  if (feedArticles) {
+    saveArticlesToLocalStorage(feedArticles);
   }
 
-  return <FeedLayout articles={updatedFeedData.articles} />;
+  return <FeedLayout articles={feedArticles} />;
 }

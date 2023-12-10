@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import FeedLayout from "components/feedLayout/feedLayout";
 import { getBookmarks } from "queries/bookmarks";
+import { Article } from "types/article";
 
 export default function Bookmarks() {
   const {
@@ -20,8 +21,13 @@ export default function Bookmarks() {
     return <div>loading</div>;
   }
   if (articles) {
-    console.log("Bookmarks ", articles);
-    return <FeedLayout articles={articles} />;
+    const bookmarkedArticles: Article[] = articles.map(
+      (article: Article): Article => ({
+        ...article,
+        isBookmarked: true,
+      })
+    );
+    return <FeedLayout articles={bookmarkedArticles} />;
   }
   return <div>Bookmarks</div>;
 }

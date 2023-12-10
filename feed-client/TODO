@@ -1,7 +1,23 @@
+TODAY: 
+  ☐ Clean response headers 
+  ☐ Find better method than onsettled to update ui after createBookmark and deleteBookmark
+  ☐ Add bookmarks behaviour to bookmarks page 
+  
+Bookmarks:
+  ✔ Create Bookmark page @started(23-12-08 14:19) @done(23-12-09 10:02) @lasted(19h43m51s)
+  ✔ Get all bookmarks at mount @done(23-12-09 10:02)
+  ✔ Sort in youngest to oldest order @done(23-12-09 10:02)
+  ✔ implement save bookmarks @done(23-12-09 10:02)
+  ✔ implement delete bookmark @done(23-12-09 11:10)
+  ☐ Show bookmarked date 
+  ☐ Handle bookmarks on bookmarks
+  ☐ Handle bookmarks on feed 
+  ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
+
 VIEWS:
-  ☐ Add not found page
-  ✔ Add login page @started(23-12-06 00:50) @done(23-12-07 15:31) @lasted(1d14h41m3s)
   ✔ Add signup page @done(23-12-07 20:53)
+  ✔ Add login page @started(23-12-06 00:50) @done(23-12-07 15:31) @lasted(1d14h41m3s)
+  ☐ Add not found page
   ☐ Add error page
   ☐ Add loading page
   ☐ Add search page
@@ -10,27 +26,21 @@ Search :
   ☐ Add searchbar with autocomplete on each keystroke for contact search 
     
 AUTH:
-  ☐ Add form validation to Login
-  ☐ Add form validation to Signup
+  ☐ Add client form validation to Login
+  ☐ Add client form validation to Signup
 
 ROUTING:  
   ✔ Centralized routing @started(23-12-05 12:02) @done(23-12-05 23:30) @lasted(11h28m2s)
   ☐ redirect user automatically if authenticated @started(23-12-07 22:17)
   ☐ find auth guard mechanism in the router (data in router?)
+
 UX :
-☐ Find visual cue to show article has already been upvoted
+  ☐ Find visual cue to show article has already been upvoted
 
 Refacto: 
   ✔ clean Auth module @started(23-12-07 20:53) @done(23-12-08 02:28) @lasted(5h35m43s)
 
-Bookmarks:
-  ✔ Create Bookmark page @started(23-12-08 14:19) @done(23-12-09 10:02) @lasted(19h43m51s)
-  ✔ Get all bookmarks at mount @done(23-12-09 10:02)
-  ✔ Sort in youngest to oldest order @done(23-12-09 10:02)
-  ✔ implement save bookmarks @done(23-12-09 10:02)
-  ✔ implement delete bookmark @done(23-12-09 11:10)
-  ☐ Show bookmarked date 
-  ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
+
  
 
 

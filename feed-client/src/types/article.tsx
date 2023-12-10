@@ -1,4 +1,4 @@
-export type Article = {
+export interface Article {
   author: string;
   content?: string;
   description: string;
@@ -8,7 +8,7 @@ export type Article = {
   url: string;
   urlToImage?: string;
   isBookmarked?: boolean;
-};
+}
 
 export type StoredArticles = {
   updatedAt: string;

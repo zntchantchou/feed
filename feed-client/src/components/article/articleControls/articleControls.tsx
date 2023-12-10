@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import styles from "./articleControls.module.css";
+import Icon from "components/icon/icon";
+import { joinClasses } from "utils/style";
 
 interface ArticleControlsProps {
   article: Article;
@@ -17,12 +19,17 @@ enum VARIANTS {
 export default function ArticleControls({ article }: ArticleControlsProps) {
   let location = useLocation();
   const [variant, setVariant] = useState<VARIANTS>(VARIANTS.article);
+  const [isBookmarked, setIsBookmarked] = useState(!!article.isBookmarked);
   const {
     mutate: deleteBookmarkFn,
     data: deleteBookmarkData,
     error: deleteBookmarkError,
   } = useMutation({
     mutationFn: () => deleteBookmark(article),
+    onSettled: () => {
+      console.log("SETTLED deleteBookmarkFn");
+      setIsBookmarked(false);
+    },
   });
   const {
     mutate: saveBookmarkFn,
@@ -30,53 +37,54 @@ export default function ArticleControls({ article }: ArticleControlsProps) {
     error: saveBookmarkError,
   } = useMutation({
     mutationFn: () => createBookMark(article),
+    onSettled: () => {
+      console.log("SETTLED saveBookmarkFn");
+      setIsBookmarked(true);
+    },
   });
 
   const handleClickBookmark = async () => {
     try {
-      if (variant === VARIANTS.article) {
-        console.log("SAVE BOOKMARK ");
-        saveBookmarkFn();
-      } else {
-        console.log("DELETE FROM BOOKMARKS ");
-        deleteBookmarkFn();
-      }
-    } catch {
-      console.log("bookmarkArticle");
+      article.isBookmarked ? deleteBookmarkFn() : saveBookmarkFn();
+    } catch (err) {
+      console.log("handleClickBookmark ERROR ", err);
     }
   };
 
   useEffect(() => {
     if (location?.pathname === "/bookmarks") {
-      // console.log("SET VARIANT bookmark");
+      console.log("SET VARIANT bookmark");
       if (variant !== VARIANTS.bookmark) setVariant(VARIANTS.bookmark);
     } else {
-      // console.log("SET VARIANT article");
+      console.log("SET VARIANT article");
       if (variant !== VARIANTS.article) setVariant(VARIANTS.article);
     }
-    // console.log("LOCALTION ", location);
+    console.log("LOCALTION ", location);
   }, [location]);
 
   return (
     <div className={styles.root}>
-      <img
+      <div
+        className={joinClasses(
+          styles.img,
+          isBookmarked ? styles.bookmarked : ""
+        )}
         onClick={handleClickBookmark}
-        className={styles.img}
-        src={"./bookmark.svg"}
-        alt="bookmark article"
-        color="white"
-      ></img>
+      >
+        <Icon
+          fill="#303030"
+          stroke={isBookmarked ? "orangered" : "white"}
+        ></Icon>
+      </div>
       <img
         className={styles.img}
         src={"./arrow-up.svg"}
         alt="upvote article"
-        color="white"
       ></img>
       <img
         className={styles.img}
         src={"./bell.svg"}
         alt="recommend article"
-        color="white"
       ></img>
     </div>
   );
