@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import styles from "./articleControls.module.css";
-import Icon from "components/icon/icon";
+import Icon, { iconNamesEnum } from "components/icon/icon";
 import { joinClasses } from "utils/style";
 
 interface ArticleControlsProps {
@@ -74,6 +74,7 @@ export default function ArticleControls({ article }: ArticleControlsProps) {
         <Icon
           fill="#303030"
           stroke={isBookmarked ? "orangered" : "white"}
+          name={iconNamesEnum.bookmark}
         ></Icon>
       </div>
       <img

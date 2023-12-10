@@ -1,7 +1,8 @@
 TODAY: 
+  ✔ Add bookmarks behaviour to bookmarks page @done(23-12-10 11:36)
+  ☐ Import sidenav icons as components @started(23-12-10 11:37)
   ☐ Clean response headers 
   ☐ Find better method than onsettled to update ui after createBookmark and deleteBookmark
-  ☐ Add bookmarks behaviour to bookmarks page 
   
 Bookmarks:
   ✔ Create Bookmark page @started(23-12-08 14:19) @done(23-12-09 10:02) @lasted(19h43m51s)
