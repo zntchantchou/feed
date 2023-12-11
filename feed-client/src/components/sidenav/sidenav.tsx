@@ -42,7 +42,14 @@ export default function Sidenav() {
 
   return (
     <div className={styles.root}>
-      <div className={styles.title}> feed </div>
+      <div
+        className={styles.title}
+        onClick={() => {
+          navigate("/feed");
+        }}
+      >
+        feed
+      </div>
 
       <div className={styles.navItems}>
         {items.map((item) => (

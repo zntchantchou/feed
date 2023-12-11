@@ -17,6 +17,7 @@
 }
 
 .title {
+  cursor: pointer;
   color: orangered;
   height: 1.4rem;
   width: 100%;
