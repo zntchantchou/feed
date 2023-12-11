@@ -6,10 +6,13 @@ import {
   Get,
   Post,
   Req,
+  UsePipes,
 } from '@nestjs/common';
-import { ArticlesService } from 'src/articles/articles/articles.service';
-import { ArticleDto } from './dto/article.dto';
+import { ArticlesService } from '@modules/articles/articles.service';
+import { ArticleDto } from '@modules/articles/article.dto';
+import { ValidatorPipe } from '@common/pipes/validatorPipe';
 import { BookmarkService } from './bookmarks.service';
+import { createBookmarkSchema } from './bookmarks.schemas';
 
 @Controller('bookmarks')
 export class BookmarksController {
@@ -29,19 +32,17 @@ export class BookmarksController {
   }
 
   @Post()
+  @UsePipes(new ValidatorPipe(createBookmarkSchema))
   async createBookmark(@Body() article: ArticleDto, @Req() req) {
     try {
       let savedArticle = await this.articleService.findByArticle(article);
-      console.log('ARTICLE EXISTS');
       if (!savedArticle) {
         savedArticle = await this.articleService.create(article);
-        console.log('NEWLY SAVED ARTICLE \n', savedArticle);
       }
       const savedBookmark = await this.bookmarkService.create({
         userId: req?.userId,
         articleId: savedArticle.uid,
       });
-      console.log('SavedBookmark \n', savedBookmark);
       return 'success';
     } catch (e) {
       if (e?.errors) {

@@ -1,10 +1,10 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { BookmarksModule } from './bookmarks/bookmarks.module';
+import { BookmarksModule } from 'src/modules/bookmarks/bookmarks.module';
 import { ConfigModule } from '@nestjs/config';
 import { TokenMiddleware } from './common/middleware/token/token.middleware';
-import { BookmarksController } from './bookmarks/bookmarks.controller';
+import { BookmarksController } from 'src/modules/bookmarks/bookmarks.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
 import Article from 'db/models/Article';
 import Bookmark from 'db/models/Bookmark';

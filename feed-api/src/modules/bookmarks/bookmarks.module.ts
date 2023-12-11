@@ -1,7 +1,7 @@
-import { BookmarksController } from './bookmarks.controller';
+import { BookmarksController } from '@modules/bookmarks/bookmarks.controller';
+import { BookmarkService } from '@modules/bookmarks/bookmarks.service';
+import { ArticlesService } from '@modules/articles/articles.service';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { BookmarkService } from './bookmarks.service';
-import { ArticlesService } from 'src/articles/articles/articles.service';
 import { Module } from '@nestjs/common';
 import Article from 'db/models/Article';
 import Bookmark from 'db/models/Bookmark';

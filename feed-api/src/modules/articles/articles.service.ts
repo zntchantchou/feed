@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Optional } from 'sequelize';
-import { ArticleDto } from 'src/bookmarks/dto/article.dto';
+import { ArticleDto } from '@modules/articles/article.dto';
 import Article from 'db/models/Article';
 import { getUid } from './utils';
 import { Op } from 'sequelize';

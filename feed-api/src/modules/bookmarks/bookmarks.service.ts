@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { BookmarkDto } from './dto/bookmarks.dto';
-import { ArticleDto } from './dto/article.dto';
+import { ArticleDto } from '@modules/articles/article.dto';
+import { getUid } from '@modules/articles/utils';
 import { Op } from 'sequelize';
 import Bookmark from 'db/models/Bookmark';
 import Article from 'db/models/Article';
-import { getUid } from 'src/articles/articles/utils';
+import { BookmarkDto } from './bookmarks.dto';
 
 export interface BookmarkedArticle extends ArticleDto {
   bookmarkedAt: string;
@@ -27,7 +27,9 @@ export class BookmarkService {
     }
   }
 
-  async getBookmarkedArticles(userId: string): Promise<BookmarkedArticle[]> {
+  async getBookmarkedArticles(
+    userId: string,
+  ): Promise<BookmarkedArticle[] | undefined> {
     try {
       const bookmarks = await this.bookmarkModel.findAll({
         where: {

@@ -1,5 +1,5 @@
 import Article from 'db/models/Article';
-import { ArticleDto } from 'src/bookmarks/dto/article.dto';
+import { ArticleDto } from '@modules/articles/article.dto';
 
 export const getUid = (article: ArticleDto | Article) => {
   const date = new Date(article.publishedAt)
