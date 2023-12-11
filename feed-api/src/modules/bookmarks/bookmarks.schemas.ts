@@ -4,12 +4,15 @@ export const createBookmarkSchema = z
   .object({
     title: z.string(),
     description: z.string(),
-    urlToImage: z.string(),
-    url: z.number(),
+    url: z.string().url(),
+    urlToImage: z.string().url(),
     source: z.string(),
     publishedAt: z.string(),
     content: z.string().optional(),
   })
   .required();
 
-export type createArticleDt = z.infer<typeof createBookmarkSchema>;
+export const deleteBookmarkSchema = createBookmarkSchema;
+
+export type createArticleDto = z.infer<typeof createBookmarkSchema>;
+export type deleteBookmarkDto = z.infer<typeof deleteBookmarkSchema>;

@@ -1,18 +1,24 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
+  HttpStatus,
   Post,
   Req,
+  Res,
   UsePipes,
 } from '@nestjs/common';
 import { ArticlesService } from '@modules/articles/articles.service';
-import { ArticleDto } from '@modules/articles/article.dto';
 import { ValidatorPipe } from '@common/pipes/validatorPipe';
 import { BookmarkService } from './bookmarks.service';
-import { createBookmarkSchema } from './bookmarks.schemas';
+import { Response } from 'express';
+import {
+  createArticleDto,
+  createBookmarkSchema,
+  deleteBookmarkDto,
+  deleteBookmarkSchema,
+} from './bookmarks.schemas';
 
 @Controller('bookmarks')
 export class BookmarksController {
@@ -22,18 +28,26 @@ export class BookmarksController {
   ) {}
 
   @Get()
-  async getBookmarks(@Req() req) {
+  async getBookmarks(@Req() req, @Res() res: Response) {
     try {
       console.log('[get bookmarks] userId => ', req.userId);
-      return this.bookmarkService.getBookmarkedArticles(req.userId);
+      const bookmarks = await this.bookmarkService.getBookmarkedArticles(
+        req.userId,
+      );
+      return res.status(200).send(bookmarks);
     } catch (e) {
       console.log('[getUserBookmarks] Error : ', e);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
     }
   }
 
   @Post()
   @UsePipes(new ValidatorPipe(createBookmarkSchema))
-  async createBookmark(@Body() article: ArticleDto, @Req() req) {
+  async createBookmark(
+    @Body() article: createArticleDto,
+    @Req() req,
+    @Res() res: Response,
+  ) {
     try {
       let savedArticle = await this.articleService.findByArticle(article);
       if (!savedArticle) {
@@ -43,7 +57,7 @@ export class BookmarksController {
         userId: req?.userId,
         articleId: savedArticle.uid,
       });
-      return 'success';
+      return res.status(HttpStatus.CREATED).send();
     } catch (e) {
       if (e?.errors) {
         const err = e?.errors[0];
@@ -53,19 +67,23 @@ export class BookmarksController {
       } else {
         console.log('getBookmarksByUserId \n', e);
       }
-      throw new BadRequestException(e);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
     }
   }
 
   @Delete()
-  async deleteBookmark(@Body() article: ArticleDto, @Req() req) {
+  @UsePipes(new ValidatorPipe(deleteBookmarkSchema))
+  async deleteBookmark(
+    @Body() article: deleteBookmarkDto,
+    @Req() req,
+    @Res() res: Response,
+  ) {
     try {
       console.log('[BookmarksController] DELETE BOOKMARKS ----  \n');
-      console.log(article, req.userId);
       await this.bookmarkService.deleteBookmark(article, req.userId);
-      return 'success';
+      return res.status(HttpStatus.OK).send();
     } catch (e) {
-      return 'error';
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
     }
   }
 }

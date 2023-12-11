@@ -6,6 +6,7 @@ import { Op } from 'sequelize';
 import Bookmark from 'db/models/Bookmark';
 import Article from 'db/models/Article';
 import { BookmarkDto } from './bookmarks.dto';
+import { deleteBookmarkDto } from './bookmarks.schemas';
 
 export interface BookmarkedArticle extends ArticleDto {
   bookmarkedAt: string;
@@ -29,7 +30,7 @@ export class BookmarkService {
 
   async getBookmarkedArticles(
     userId: string,
-  ): Promise<BookmarkedArticle[] | undefined> {
+  ): Promise<BookmarkedArticle[] | []> {
     try {
       const bookmarks = await this.bookmarkModel.findAll({
         where: {
@@ -37,7 +38,9 @@ export class BookmarkService {
         },
         include: [Article],
       });
-
+      console.log('FOUND WITH USERID ', userId);
+      console.log('bookmarks ', bookmarks);
+      if (!bookmarks) return [];
       const articles = bookmarks
         .map((bookmark) => ({
           ...bookmark.toJSON()?.article,
@@ -48,10 +51,12 @@ export class BookmarkService {
       return articles;
     } catch (e) {
       console.log('[getBookmarkedArticles] error', e);
+      throw e;
     }
   }
+  // zxPyzCYSNGgr6tQtN7oq2m2N1U33
 
-  async deleteBookmark(article: ArticleDto, userId: string) {
+  async deleteBookmark(article: deleteBookmarkDto, userId: string) {
     try {
       console.log('deleteBookmark \n');
       const deleted = await this.bookmarkModel.destroy({

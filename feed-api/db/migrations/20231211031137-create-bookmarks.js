@@ -11,14 +11,15 @@ module.exports = {
         unique: true,
       },
       userId: {
+        unique: 'userId-articleId',
         allowNull: false,
         type: Sequelize.STRING,
       },
       articleId: {
+        unique: 'userId-articleId',
         allowNull: false,
         primaryKey: true,
         type: Sequelize.STRING,
-        unique: true,
         references: {
           model: 'Articles',
           key: 'uid',

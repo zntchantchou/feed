@@ -7,9 +7,8 @@ async function bootstrap() {
     bodyParser: true,
     cors: true,
   });
-  const { PORT } = process.env;
-
-  await app.listen(PORT);
+  const { PORT } = process?.env;
+  if (PORT) await app.listen(PORT);
 
   console.log(
     '-------- FIREBASE APPCHECK -------- \n \n',
