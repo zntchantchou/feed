@@ -10,9 +10,10 @@ Bookmarks:
   ✔ Sort in youngest to oldest order @done(23-12-09 10:02)
   ✔ implement save bookmarks @done(23-12-09 10:02)
   ✔ implement delete bookmark @done(23-12-09 11:10)
+  ✔ Handle bookmarks on feed @done(23-12-11 02:10)
+  ✔ Handle bookmarks on bookmarks @done(23-12-11 02:10)
   ☐ Show bookmarked date 
-  ☐ Handle bookmarks on bookmarks
-  ☐ Handle bookmarks on feed 
+  ☐ Handle bookmark being removed 
   ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
 
 VIEWS:

@@ -19,8 +19,6 @@ import Bookmark from 'db/models/Bookmark';
       database: process.env.DB_NAME,
       password: process.env.DB_PASSWORD,
       username: process.env.DB_USER,
-      autoLoadModels: true,
-      synchronize: true,
       dialect: 'postgres',
       models: [Article, Bookmark],
     }),

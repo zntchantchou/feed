@@ -1,57 +1,60 @@
+
+Bookmarks:
+  ✔ Create Model @done(23-12-09 06:23)
+  ✔ Link to article @done(23-12-09 06:23)
+  ✔ CreateBookmark method @done(23-12-09 06:23)
+  ✔ Add unique to bookmark model => userId+ArticleId @done(23-12-09 07:56)
+  ✔ GetBookmarks method @done(23-12-09 09:41)
+  ✔ DeleteBookmark method @done(23-12-09 11:42)
+  ✔ Get bookmarks from feed too @done(23-12-11 04:00)
+  ✔ use query to bookmarks to let each article know if it is bookmarked @done(23-12-11 04:00)
+  ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
+
 Auth: 
   ✔ Setup firebase auth sdk @done(23-12-08 14:20)
   ✔ Setup Bookmarks linked to a User @done(23-12-09 06:29)
+
+Migrations:
+  ✔ setup migrations @done(23-12-11 04:38)
+  ☐ double check names for migration scripts
+  ☐ add seeders for testing later
+  ☐ Migrate at application start
+
 Recommandations:
   ☐ User should be notified if they get a recommendation
   ☐ User should be notified if they get a contact request
+
 Upvote:
   ☐ Upvote Article
+
 Downvote:
   ☐ Downvote article 
+
 Contacts:
   ☐ Contact Request 
   ☐ Search endpoint 
-Article: 
-Models:
-  ☐ Article
+
+  ✔ (Users on firebase) @done(23-12-11 03:59)
+  Models:
+    Article:
     - author 
     - source
     - description
     - url
     - urlToImage
-  ☐ (Users on firebase)
   ☐ ContactRequest
     - From : User
     - To : User
     - status : Awaiting (Accepted, Declined)
   ☐ Upvotes
     - user: Id
-    - article: IdBookmarks:
-    ☐ Get all bookmarks from API at application start
-    ☐ Create Bookmark page @started(23-12-08 14:19)
-    ☐ Show date 
-    ☐ Sort in youngest to oldest order
-    ☐ save bookmarks via api
-    ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
-  
   ☐ Downvote 
     - user: Id
     - article: Id
   ☐ Recommendations
   ☐ Tags 
   ☐ Searches
-
-  Bookmarks:
-    ✔ Create Model @done(23-12-09 06:23)
-    ✔ Link to article @done(23-12-09 06:23)
-    ✔ CreateBookmark method @done(23-12-09 06:23)
-    ✔ Add unique to bookmark model => userId+ArticleId @done(23-12-09 07:56)
-    ✔ GetBookmarks method @done(23-12-09 09:41)
-    ✔ DeleteBookmark method @done(23-12-09 11:42)
-    ☐ Get bookmarks from feed too
-    ☐ use query to bookmarks to let each article know if it is bookmarked 
-    ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
   
-  Logging:
-    ☐ file logger
-    ☐ dev logger
+Logging:
+  ☐ file logger
+  ☐ dev logger
