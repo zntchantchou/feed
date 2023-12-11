@@ -15,6 +15,7 @@ export default function Bookmarks() {
   });
 
   if (isError || error) {
+    console.log("IS ERROR", isError, "\n", error);
     return <div>Error</div>;
   }
   if (isPending) {

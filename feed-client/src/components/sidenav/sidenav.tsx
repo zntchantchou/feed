@@ -49,8 +49,7 @@ export default function Sidenav() {
           <div
             className={styles.navItem}
             key={item.label}
-            onClick={async () => {
-              await Auth.logOut();
+            onClick={() => {
               navigate(item.redirectTo);
             }}
           >

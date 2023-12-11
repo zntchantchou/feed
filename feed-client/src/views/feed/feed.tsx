@@ -54,18 +54,11 @@ export default function Feed(): JSX.Element | null {
   };
 
   useEffect(() => {
-    console.log("feed + book");
     if (newsApiArticles && bookmarks) {
-      console.log("BOOKMARKS + NEWSAPI ARTICLES ");
-      console.log(bookmarks, feedArticles);
       const updateNewsArticles = getUpdatedFeedArticles(newsApiArticles);
       setFeedArticles(updateNewsArticles);
     }
   }, [bookmarks, newsApiArticles]);
-
-  useEffect(() => {
-    console.log("UPDATED FEED ARTICLES => ", feedArticles);
-  }, [feedArticles]);
 
   if (isLoading || isBookmarksPending) {
     console.log("isLoading", isLoading);

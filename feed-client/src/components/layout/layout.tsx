@@ -12,6 +12,7 @@ function Layout() {
 
   useEffect(() => {
     Auth.waitForStart().then(() => {
+      console.log("Auth.currentUser ", Auth.currentUser);
       if (!Auth.currentUser) {
         return navigate("/login");
       }

@@ -11,5 +11,5 @@ export const getArticles = async () => {
   console.log("url", url);
   const result = await fetch(url);
   const results = await result.json();
-  return results as Article[];
+  return results?.articles as Article[];
 };
