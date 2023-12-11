@@ -42,12 +42,7 @@ export default function Sidenav() {
 
   return (
     <div className={styles.root}>
-      <div
-        className={styles.title}
-        onClick={() => {
-          navigate("/feed");
-        }}
-      >
+      <div className={styles.title} onClick={() => navigate(RouteNames.feed)}>
         feed
       </div>
 

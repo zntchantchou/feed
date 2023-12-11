@@ -18,17 +18,16 @@ export default function Bookmarks() {
     console.log("IS ERROR", isError, "\n", error);
     return <div>Error</div>;
   }
-  if (isPending) {
-    return <div>loading</div>;
+
+  if (isPending || !articles) {
+    return <FeedLayout isLoading={true} />;
   }
-  if (articles) {
-    const bookmarkedArticles: Article[] = articles.map(
-      (article: Article): Article => ({
-        ...article,
-        isBookmarked: true,
-      })
-    );
-    return <FeedLayout articles={bookmarkedArticles} />;
-  }
-  return <div>Bookmarks</div>;
+
+  const bookmarkedArticles: Article[] = articles.map(
+    (article: Article): Article => ({
+      ...article,
+      isBookmarked: true,
+    })
+  );
+  return <FeedLayout articles={bookmarkedArticles} isLoading={isPending} />;
 }

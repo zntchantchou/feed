@@ -1,14 +1,15 @@
-import { Article } from "types/article";
 import { createBookMark, deleteBookmark } from "queries/bookmarks";
-import { useLocation } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import styles from "./articleControls.module.css";
-import Icon, { IconNamesEnum } from "components/icon/icon";
+import { useLocation } from "react-router-dom";
 import { joinClasses } from "utils/style";
+import { Article } from "types/article";
+import Icon, { IconNamesEnum } from "components/icon/icon";
+import styles from "./articleControls.module.css";
 
 interface ArticleControlsProps {
   article: Article;
+  removeFromPage: () => void;
 }
 
 enum VARIANTS {
@@ -16,10 +17,14 @@ enum VARIANTS {
   bookmark = "BOOMARK",
 }
 
-export default function ArticleControls({ article }: ArticleControlsProps) {
+export default function ArticleControls({
+  article,
+  removeFromPage,
+}: ArticleControlsProps) {
   let location = useLocation();
   const [variant, setVariant] = useState<VARIANTS>(VARIANTS.article);
   const [isBookmarked, setIsBookmarked] = useState(!!article.isBookmarked);
+  const queryClient = useQueryClient();
   const {
     mutate: deleteBookmarkFn,
     data: deleteBookmarkData,
@@ -27,8 +32,15 @@ export default function ArticleControls({ article }: ArticleControlsProps) {
   } = useMutation({
     mutationFn: () => deleteBookmark(article),
     onSettled: () => {
-      console.log("SETTLED deleteBookmarkFn");
       setIsBookmarked(false);
+      console.log("SETTLED deleteBookmarkFn");
+      if (variant == VARIANTS.bookmark) {
+        console.log("Invalidate");
+        // force react query to refresh the bookmarks request when we go back to the feed
+        queryClient.invalidateQueries({ queryKey: ["bookmarks"] });
+        // removes bookmark from the page if url is /bookmarks
+        removeFromPage();
+      }
     },
   });
   const {
@@ -40,12 +52,14 @@ export default function ArticleControls({ article }: ArticleControlsProps) {
     onSettled: () => {
       console.log("SETTLED saveBookmarkFn");
       setIsBookmarked(true);
+      queryClient.invalidateQueries({ queryKey: ["bookmarks"] });
     },
   });
 
   const handleClickBookmark = async () => {
     try {
-      article.isBookmarked ? deleteBookmarkFn() : saveBookmarkFn();
+      isBookmarked ? deleteBookmarkFn() : saveBookmarkFn();
+      console.log("handleClickBookmark isBookmarked ", isBookmarked);
     } catch (err) {
       console.log("handleClickBookmark ERROR ", err);
     }
@@ -53,13 +67,10 @@ export default function ArticleControls({ article }: ArticleControlsProps) {
 
   useEffect(() => {
     if (location?.pathname === "/bookmarks") {
-      console.log("SET VARIANT bookmark");
       if (variant !== VARIANTS.bookmark) setVariant(VARIANTS.bookmark);
     } else {
-      console.log("SET VARIANT article");
       if (variant !== VARIANTS.article) setVariant(VARIANTS.article);
     }
-    console.log("LOCALTION ", location);
   }, [location]);
 
   return (

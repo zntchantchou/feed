@@ -1,9 +1,13 @@
 TODAY: 
   ✔ Add bookmarks behaviour to bookmarks page @done(23-12-10 11:36)
   ✔ Import sidenav icons as components @started(23-12-10 11:37) @done(23-12-10 13:31) @lasted(1h54m45s)
+  ✘ Find better method than onsettled to update ui after createBookmark and deleteBookmark\ @cancelled(23-12-11 18:21)
   ☐ Clean response headers 
-  ☐ Find better method than onsettled to update ui after createBookmark and deleteBookmark\
-  
+  ☐ Show bookmarked date 
+  ☐ Handle bookmark being removed (visual)
+  ☐ Invalidate 'bookmarks' query cache when an article is removed from bookmarks
+  ☐ Add api-level request validation
+
 Bookmarks:
   ✔ Create Bookmark page @started(23-12-08 14:19) @done(23-12-09 10:02) @lasted(19h43m51s)
   ✔ Get all bookmarks at mount @done(23-12-09 10:02)
@@ -12,8 +16,6 @@ Bookmarks:
   ✔ implement delete bookmark @done(23-12-09 11:10)
   ✔ Handle bookmarks on feed @done(23-12-11 02:10)
   ✔ Handle bookmarks on bookmarks @done(23-12-11 02:10)
-  ☐ Show bookmarked date 
-  ☐ Handle bookmark being removed 
   ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
 
 VIEWS:

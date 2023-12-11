@@ -60,21 +60,20 @@ export default function Feed(): JSX.Element | null {
     }
   }, [bookmarks, newsApiArticles]);
 
-  if (isLoading || isBookmarksPending) {
-    console.log("isLoading", isLoading);
-    return <div> Loading ....</div>;
-  }
-
   if (error) {
     console.log("error", error);
     return <div> Error ....</div>;
   }
 
-  if (!feedArticles) return null;
-
-  if (feedArticles) {
-    saveArticlesToLocalStorage(feedArticles);
+  if (isLoading || !feedArticles) {
+    return <FeedLayout isLoading={true} />;
   }
 
-  return <FeedLayout articles={feedArticles} />;
+  saveArticlesToLocalStorage(feedArticles);
+  return (
+    <FeedLayout
+      articles={feedArticles}
+      isLoading={isLoading || isBookmarksPending}
+    />
+  );
 }
