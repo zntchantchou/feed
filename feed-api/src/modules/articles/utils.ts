@@ -1,7 +1,7 @@
 import Article from 'db/models/Article';
-import { createArticleDto } from '@modules/bookmarks/bookmarks.schemas';
+import { articleDto } from '@modules/articles/articles.schema';
 
-export const getUid = (article: createArticleDto | Article) => {
+export const getUid = (article: articleDto | Article) => {
   const date = new Date(article.publishedAt)
     .toISOString()
     .replace(/[^a-zA-Z0-9]/g, '');

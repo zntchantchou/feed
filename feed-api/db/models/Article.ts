@@ -9,6 +9,7 @@ import {
   PrimaryKey,
 } from 'sequelize-typescript';
 import Bookmark from './Bookmark';
+import Upvote from './Upvote';
 
 @Table
 export class Article extends Model {
@@ -61,6 +62,9 @@ export class Article extends Model {
 
   @HasMany(() => Bookmark)
   bookmarks: Bookmark[];
+
+  @HasMany(() => Upvote)
+  upvotes: Upvote[];
 
   // creates a unique key to enforce uniqueness
   @BeforeValidate

@@ -1,14 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { ArticleDto } from '@modules/articles/article.dto';
+import {
+  createBookmarkDto,
+  deleteBookmarkDto,
+} from '@modules/bookmarks/bookmarks.schemas';
+import { articleDto } from '@modules/articles/articles.schema';
 import { getUid } from '@modules/articles/utils';
 import { Op } from 'sequelize';
 import Bookmark from 'db/models/Bookmark';
 import Article from 'db/models/Article';
 import { BookmarkDto } from './bookmarks.dto';
-import { deleteBookmarkDto } from './bookmarks.schemas';
 
-export interface BookmarkedArticle extends ArticleDto {
+export interface BookmarkedArticle extends articleDto {
   bookmarkedAt: string;
 }
 
@@ -38,8 +41,6 @@ export class BookmarkService {
         },
         include: [Article],
       });
-      console.log('FOUND WITH USERID ', userId);
-      console.log('bookmarks ', bookmarks);
       if (!bookmarks) return [];
       const articles = bookmarks
         .map((bookmark) => ({
@@ -54,18 +55,17 @@ export class BookmarkService {
       throw e;
     }
   }
-  // zxPyzCYSNGgr6tQtN7oq2m2N1U33
 
   async deleteBookmark(article: deleteBookmarkDto, userId: string) {
     try {
-      console.log('deleteBookmark \n');
+      console.log('[deleteBookmark]');
       const deleted = await this.bookmarkModel.destroy({
         where: {
           articleId: { [Op.like]: await getUid(article) },
           userId: userId,
         },
       });
-      console.log('DELETED', deleted);
+      console.log('[DELETED]', deleted);
       return deleted;
     } catch (e) {}
   }

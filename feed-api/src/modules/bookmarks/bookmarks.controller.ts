@@ -14,10 +14,10 @@ import { ValidatorPipe } from '@common/pipes/validatorPipe';
 import { BookmarkService } from './bookmarks.service';
 import { Response } from 'express';
 import {
-  createArticleDto,
   createBookmarkSchema,
-  deleteBookmarkDto,
   deleteBookmarkSchema,
+  createBookmarkDto,
+  deleteBookmarkDto,
 } from './bookmarks.schemas';
 
 @Controller('bookmarks')
@@ -44,19 +44,17 @@ export class BookmarksController {
   @Post()
   @UsePipes(new ValidatorPipe(createBookmarkSchema))
   async createBookmark(
-    @Body() article: createArticleDto,
+    @Body() article: createBookmarkDto,
     @Req() req,
     @Res() res: Response,
   ) {
     try {
-      let savedArticle = await this.articleService.findByArticle(article);
-      if (!savedArticle) {
-        savedArticle = await this.articleService.create(article);
-      }
+      const savedArticle = await this.articleService.findOrCreate(article);
       const savedBookmark = await this.bookmarkService.create({
         userId: req?.userId,
         articleId: savedArticle.uid,
       });
+      console.log('SAVED bookmark ---------------- \n', savedBookmark);
       return res.status(HttpStatus.CREATED).send();
     } catch (e) {
       if (e?.errors) {

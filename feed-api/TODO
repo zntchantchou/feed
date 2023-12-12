@@ -1,4 +1,13 @@
 
+Upvotes:
+  ✔ create migration @done(23-12-12 11:52)
+  ✔ create model @done(23-12-12 11:52)
+  ☐ create upvotes module
+  ☐ create validation schema
+  ☐ implement CREATE controller
+  ☐ implement DELETE controller
+  ☐ Add upvotes to Articles in the getBookmarks request
+
 Bookmarks:
   ✔ Create Model @done(23-12-09 06:23)
   ✔ Link to article @done(23-12-09 06:23)
@@ -24,8 +33,6 @@ Recommandations:
   ☐ User should be notified if they get a recommendation
   ☐ User should be notified if they get a contact request
 
-Upvote:
-  ☐ Upvote Article
 
 Downvote:
   ☐ Downvote article 

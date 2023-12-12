@@ -84,11 +84,15 @@ export default function ArticleControls({
       >
         <Icon
           fill="#303030"
-          stroke={isBookmarked ? "orangered" : "white"}
+          stroke={isBookmarked ? "orangered" : "lightgray"}
           name={IconNamesEnum.bookmark}
         ></Icon>
       </div>
-      <Icon fill="#303030" stroke="#fff" name={IconNamesEnum.arrowUp}></Icon>
+      <Icon
+        fill="#303030"
+        stroke="lightgray"
+        name={IconNamesEnum.arrowUp}
+      ></Icon>
       <Icon fill="#303030" stroke="#fff" name={IconNamesEnum.bell}></Icon>
     </div>
   );

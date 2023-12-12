@@ -8,6 +8,7 @@ import { BookmarksController } from 'src/modules/bookmarks/bookmarks.controller'
 import { SequelizeModule } from '@nestjs/sequelize';
 import Article from 'db/models/Article';
 import Bookmark from 'db/models/Bookmark';
+import Upvote from 'db/models/Upvote';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import Bookmark from 'db/models/Bookmark';
       password: process.env.DB_PASSWORD,
       username: process.env.DB_USER,
       dialect: 'postgres',
-      models: [Article, Bookmark],
+      models: [Article, Bookmark, Upvote],
     }),
   ],
   controllers: [AppController],

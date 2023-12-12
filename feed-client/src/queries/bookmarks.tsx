@@ -6,7 +6,7 @@ export async function createBookMark(article: Article) {
   const bookmark = await fetch(process.env.REACT_APP_API_URL + "/bookmarks", {
     method: POST,
     headers: await getDefaultHeaders(),
-    body: JSON.stringify({ ...article, source: article.source?.name }),
+    body: JSON.stringify(formatArticle(article)),
   });
   return bookmark.json();
 }
@@ -20,11 +20,14 @@ export async function getBookmarks() {
 }
 
 export async function deleteBookmark(article: Article) {
-  console.log("deleteBookmark ", article);
   const bookmarks = await fetch(process.env.REACT_APP_API_URL + "/bookmarks", {
     method: DELETE,
     headers: await getDefaultHeaders(),
-    body: JSON.stringify(article),
+    body: JSON.stringify(formatArticle(article)),
   });
   return bookmarks.json();
+}
+
+function formatArticle(article: Article) {
+  return { ...article, source: article.source?.name };
 }
