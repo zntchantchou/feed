@@ -13,7 +13,7 @@ export const articleSchema = z
     description: z.string(),
     url: z.string().url(),
     urlToImage: z.string().url(),
-    source: z.string(),
+    source: z.string().optional().nullable(),
     publishedAt: z.string(),
     content: z.string().optional(),
   })
