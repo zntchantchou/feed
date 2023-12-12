@@ -6,6 +6,7 @@ import { joinClasses } from "utils/style";
 import { Article } from "types/article";
 import Icon, { IconNamesEnum } from "components/icon/icon";
 import styles from "./articleControls.module.css";
+import { deleteUpvote, upVoteArticle } from "queries/upvotes";
 
 interface ArticleControlsProps {
   article: Article;
@@ -56,10 +57,45 @@ export default function ArticleControls({
     },
   });
 
+  const {
+    mutate: upvoteArticleFn,
+    data: upvoteArticleData,
+    error: upvoteArticleError,
+  } = useMutation({
+    mutationFn: () => upVoteArticle(article),
+    onSettled: (data) => {
+      console.log("UPVOTE ONSETTLED => ", data);
+      queryClient.invalidateQueries({ queryKey: ["upvotes"] });
+    },
+  });
+
+  const {
+    mutate: deleteUpvoteFn,
+    data: deleteUpvoteData,
+    error: deleteUpvoteError,
+  } = useMutation({
+    mutationFn: () => deleteUpvote(article),
+    onSettled: (data) => {
+      console.log("DELETE UPVOTE ONSETTLED => ", data);
+      queryClient.invalidateQueries({ queryKey: ["upvotes"] });
+    },
+  });
+
   const handleClickBookmark = async () => {
     try {
       isBookmarked ? deleteBookmarkFn() : saveBookmarkFn();
       console.log("handleClickBookmark isBookmarked ", isBookmarked);
+    } catch (err) {
+      console.log("handleClickBookmark ERROR ", err);
+    }
+  };
+
+  const handleClickUpvote = async () => {
+    try {
+      // isBookmarked ? deleteBookmarkFn() : saveBookmarkFn();
+      console.log("handleClickUpvote");
+      upvoteArticleFn();
+      // deleteUpvoteFn();
     } catch (err) {
       console.log("handleClickBookmark ERROR ", err);
     }
@@ -72,6 +108,10 @@ export default function ArticleControls({
       if (variant !== VARIANTS.article) setVariant(VARIANTS.article);
     }
   }, [location]);
+
+  useEffect(() => {
+    console.log("ARTICLE ", article);
+  });
 
   return (
     <div className={styles.root}>
@@ -88,11 +128,14 @@ export default function ArticleControls({
           name={IconNamesEnum.bookmark}
         ></Icon>
       </div>
-      <Icon
-        fill="#303030"
-        stroke="lightgray"
-        name={IconNamesEnum.arrowUp}
-      ></Icon>
+      <div className={styles.img} onClick={handleClickUpvote}>
+        <Icon
+          fill="#303030"
+          stroke="lightgray"
+          name={IconNamesEnum.arrowUp}
+        ></Icon>
+        {article.upvotes && <div>{article.upvotes}</div>}
+      </div>
       <Icon fill="#303030" stroke="#fff" name={IconNamesEnum.bell}></Icon>
     </div>
   );

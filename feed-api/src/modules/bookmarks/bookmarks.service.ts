@@ -62,7 +62,7 @@ export class BookmarkService {
       const deleted = await this.bookmarkModel.destroy({
         where: {
           articleId: { [Op.like]: await getUid(article) },
-          userId: userId,
+          userId: { [Op.like]: userId },
         },
       });
       console.log('[DELETED]', deleted);

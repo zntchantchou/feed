@@ -1,4 +1,5 @@
 import Auth from "auth/Auth";
+import { Article } from "types/article";
 
 export const getDefaultHeaders = async (): Promise<Headers> => {
   const headers = new Headers();
@@ -15,3 +16,7 @@ export const POST = "POST";
 export const GET = "GET";
 export const PUT = "PUT";
 export const DELETE = "DELETE";
+
+export function formatArticle(article: Article) {
+  return { ...article, source: article.source?.name };
+}

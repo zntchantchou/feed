@@ -9,10 +9,15 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import Article from 'db/models/Article';
 import Bookmark from 'db/models/Bookmark';
 import Upvote from 'db/models/Upvote';
+import { UpvotesController } from '@modules/upvotes/upvotes.controller';
+import { UpvotesModule } from '@modules/upvotes/upvotes.module';
+import { ArticlesModule } from '@modules/articles/articles.module';
 
 @Module({
   imports: [
     BookmarksModule,
+    ArticlesModule,
+    UpvotesModule,
     ConfigModule.forRoot(),
     SequelizeModule.forRoot({
       port: 8002,
@@ -32,6 +37,6 @@ export class AppModule implements NestModule {
     consumer
       .apply(TokenMiddleware)
       // all routes are authenticated
-      .forRoutes(AppController, BookmarksController);
+      .forRoutes(AppController, BookmarksController, UpvotesController);
   }
 }

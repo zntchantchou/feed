@@ -8,6 +8,7 @@ export interface Article {
   url: string;
   urlToImage?: string;
   isBookmarked?: boolean;
+  upvotes?: string;
 }
 
 export type StoredArticles = {

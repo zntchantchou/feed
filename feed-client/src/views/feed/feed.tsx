@@ -1,4 +1,3 @@
-import styles from "./feed.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { getArticles } from "queries/articles";
 import { Article as NewsArticle, StoredArticles } from "types/article";
@@ -17,10 +16,9 @@ export default function Feed(): JSX.Element | null {
     (await getStoredArticles()) || getArticles();
   const [feedArticles, setFeedArticles] = useState<NewsArticle[] | null>();
   useState<StoredArticles | null>();
-
   const {
     isLoading,
-    isError,
+    isError: hasNewsArticlesError,
     data: newsApiArticles,
     error,
   } = useQuery({
@@ -32,7 +30,7 @@ export default function Feed(): JSX.Element | null {
 
   const {
     isPending: isBookmarksPending,
-    isError: isGetBookmarksError,
+    isError: hasGetBookmarksError,
     data: bookmarks,
     error: getBookmarksError,
   } = useQuery({
@@ -65,7 +63,7 @@ export default function Feed(): JSX.Element | null {
     return <div> Error ....</div>;
   }
 
-  if (isLoading || !feedArticles) {
+  if (!feedArticles) {
     return <FeedLayout isLoading={true} />;
   }
 

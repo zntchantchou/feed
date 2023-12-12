@@ -1,11 +1,11 @@
-import { articleDto } from '@modules/articles/articles.schema';
-import { getUid } from '@modules/articles/utils';
+import { createUpvoteDto, deleteUpvoteDto } from './upvote.schema';
+import { ArticlesService } from '@modules/articles/articles.service';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { getUid } from '@modules/articles/utils';
 import { Op } from 'sequelize';
 import Upvote from 'db/models/Upvote';
-import Article from 'db/models/Article';
-import { ArticlesService } from '@modules/articles/articles.service';
+import sequelize from 'sequelize';
 
 @Injectable()
 export class UpvotesService {
@@ -14,29 +14,39 @@ export class UpvotesService {
     private articleService: ArticlesService,
   ) {}
 
-  async findByUserId(userId: string) {
-    return this.upvoteModel.findAll({
-      where: { userId: { [Op.like]: { userId } } },
+  /**
+   * @param userId
+   * @returns [{ articleId: string, upvotes: string }]
+   */
+  async getUpvotes() {
+    console.log('GET UPVOTES ');
+    const upvotes = await this.upvoteModel.findAll({
+      attributes: [
+        'articleId',
+        [sequelize.fn('count', sequelize.col('articleId')), 'upvotes'],
+      ],
+      group: ['articleId'],
     });
+    if (!upvotes) return [];
+    return upvotes;
   }
 
-  async create(article: articleDto, userId: string) {
+  async create(article: createUpvoteDto, userId: string) {
     const existingArticle = await this.articleService.findOrCreate(article);
     const saved = await this.upvoteModel.create({
       articleId: existingArticle.uid,
       userId,
     });
-    console.log(
-      '-------------- UpvotesService.Create saved ---------------- \n',
-      saved,
-    );
     return saved;
   }
 
-  async delete(article: articleDto, userId: string) {
+  async delete(article: deleteUpvoteDto, userId: string) {
     const articleId = getUid(article);
     return this.upvoteModel.destroy({
-      where: { userId: { [Op.like]: { userId, articleId } } },
+      where: {
+        userId: { [Op.like]: userId },
+        articleId: { [Op.like]: articleId },
+      },
     });
   }
 }

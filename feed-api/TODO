@@ -2,11 +2,13 @@
 Upvotes:
   ✔ create migration @done(23-12-12 11:52)
   ✔ create model @done(23-12-12 11:52)
-  ☐ create upvotes module
+  ✔ create upvotes module @done(23-12-12 15:22)
   ☐ create validation schema
   ☐ implement CREATE controller
   ☐ implement DELETE controller
   ☐ Add upvotes to Articles in the getBookmarks request
+  ☐ Add source to article: remove it from the title by splitting string
+  
 
 Bookmarks:
   ✔ Create Model @done(23-12-09 06:23)

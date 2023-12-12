@@ -1,5 +1,19 @@
 import { Article } from "types/article";
-import { getDefaultHeaders, POST, GET, DELETE } from "./http.utils";
+import {
+  getDefaultHeaders,
+  POST,
+  GET,
+  DELETE,
+  formatArticle,
+} from "./http.utils";
+
+export async function getBookmarks() {
+  const bookmarks = await fetch(process.env.REACT_APP_API_URL + "/bookmarks", {
+    method: GET,
+    headers: await getDefaultHeaders(),
+  });
+  return bookmarks.json();
+}
 
 export async function createBookMark(article: Article) {
   console.log("createBookMark", article);
@@ -11,14 +25,6 @@ export async function createBookMark(article: Article) {
   return bookmark.json();
 }
 
-export async function getBookmarks() {
-  const bookmarks = await fetch(process.env.REACT_APP_API_URL + "/bookmarks", {
-    method: GET,
-    headers: await getDefaultHeaders(),
-  });
-  return bookmarks.json();
-}
-
 export async function deleteBookmark(article: Article) {
   const bookmarks = await fetch(process.env.REACT_APP_API_URL + "/bookmarks", {
     method: DELETE,
@@ -26,8 +32,4 @@ export async function deleteBookmark(article: Article) {
     body: JSON.stringify(formatArticle(article)),
   });
   return bookmarks.json();
-}
-
-function formatArticle(article: Article) {
-  return { ...article, source: article.source?.name };
 }
