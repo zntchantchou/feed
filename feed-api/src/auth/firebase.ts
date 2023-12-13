@@ -7,6 +7,9 @@ const firebaseConfig = {
   storageBucket: process.env.STORAGE_BUCKET,
   messagingSenderId: process.env.MESSAGING_SENDER_ID,
   appId: process.env.APP_ID,
+  credential: firebaseAdmin.credential.cert(
+    'config_secrets/firebase-credentials.json',
+  ),
 };
 
 const app = firebaseAdmin.initializeApp(firebaseConfig);

@@ -1,11 +1,11 @@
 # compiled output
 /dist
-/node_modules
+/config
 /tags
+/node_modules
 
 .env
 .env.*
-/config
 # Logs
 logs
 *.log

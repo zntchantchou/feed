@@ -12,6 +12,7 @@ import Upvote from 'db/models/Upvote';
 import { UpvotesController } from '@modules/upvotes/upvotes.controller';
 import { UpvotesModule } from '@modules/upvotes/upvotes.module';
 import { ArticlesModule } from '@modules/articles/articles.module';
+import { cacheProviders } from '@common/cache/cache.providers';
 
 @Module({
   imports: [
@@ -30,13 +31,13 @@ import { ArticlesModule } from '@modules/articles/articles.module';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ...cacheProviders],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(TokenMiddleware)
       // all routes are authenticated
-      .forRoutes(AppController, BookmarksController, UpvotesController);
+      .forRoutes(BookmarksController, UpvotesController);
   }
 }
