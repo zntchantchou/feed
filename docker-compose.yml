@@ -12,6 +12,20 @@ services:
     secrets:
       - db_password
       - db_user
+
+  redis-cache:
+    image: redis/redis-stack
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - cache:/data
+    environment:
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
+volumes:
+  cache:
+    driver: local
 secrets:
   db_password:
     file: ./secrets/db_password.txt

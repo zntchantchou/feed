@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { RedisClientType } from 'redis';
+import { listUsers } from '@auth/firebase';
 
 @Controller()
 export class AppController {
@@ -22,7 +23,12 @@ export class AppController {
   @Get()
   async check() {
     console.log('[AppController] GET CHECK ------');
-    console.log('show redis !!!!!', this.redisClient);
+    // const users = await listUsers();
+    // const cacheUsers = await Promise.all(
+    //   users.map((u) => this.redisClient.json.set(`u:${u.uid}`, '$', u)),
+    // );
+    // const user = users[0];
+    // const savedUser = await this.redisClient.json.get(`u:${user.uid}`);
     return { check: 'ok' };
   }
 }

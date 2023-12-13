@@ -1,4 +1,9 @@
-SERVICES:
 
-☐ Dockerize api 
-☐ Dockerize client 
+SERVICES:
+  ☐ Dockerize api 
+  ☐ Dockerize client 
+
+REDIS:
+  ☐ Authenticate redis with password saved in secrets 
+  ☐ learn about search and operators 
+
