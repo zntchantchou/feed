@@ -31,6 +31,13 @@ export class UpvotesService {
     return upvotes;
   }
 
+  async getUpvotesByUserId(userId: string) {
+    return this.upvoteModel.findAll({
+      where: { userId: { [Op.like]: userId } },
+      attributes: ['articleId', 'createdAt'],
+    });
+  }
+
   async create(article: createUpvoteDto, userId: string) {
     const existingArticle = await this.articleService.findOrCreate(article);
     const saved = await this.upvoteModel.create({

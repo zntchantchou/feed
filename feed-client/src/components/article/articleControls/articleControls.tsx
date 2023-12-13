@@ -84,7 +84,6 @@ export default function ArticleControls({
   const handleClickBookmark = async () => {
     try {
       isBookmarked ? deleteBookmarkFn() : saveBookmarkFn();
-      console.log("handleClickBookmark isBookmarked ", isBookmarked);
     } catch (err) {
       console.log("handleClickBookmark ERROR ", err);
     }
@@ -92,10 +91,9 @@ export default function ArticleControls({
 
   const handleClickUpvote = async () => {
     try {
-      // isBookmarked ? deleteBookmarkFn() : saveBookmarkFn();
+      article.upvotedByUser ? deleteUpvoteFn() : upvoteArticleFn();
+      queryClient.invalidateQueries({ queryKey: ["upvotes"] });
       console.log("handleClickUpvote");
-      upvoteArticleFn();
-      // deleteUpvoteFn();
     } catch (err) {
       console.log("handleClickBookmark ERROR ", err);
     }
@@ -108,10 +106,6 @@ export default function ArticleControls({
       if (variant !== VARIANTS.article) setVariant(VARIANTS.article);
     }
   }, [location]);
-
-  useEffect(() => {
-    console.log("ARTICLE ", article);
-  });
 
   return (
     <div className={styles.root}>
@@ -128,13 +122,13 @@ export default function ArticleControls({
           name={IconNamesEnum.bookmark}
         ></Icon>
       </div>
-      <div className={styles.img} onClick={handleClickUpvote}>
+      <div className={joinClasses(styles.upvotes)} onClick={handleClickUpvote}>
         <Icon
           fill="#303030"
-          stroke="lightgray"
+          stroke={article.upvotedByUser ? "orangered" : "lightgray"}
           name={IconNamesEnum.arrowUp}
         ></Icon>
-        {article.upvotes && <div>{article.upvotes}</div>}
+        {article.upvotes && <div>({article.upvotes})</div>}
       </div>
       <Icon fill="#303030" stroke="#fff" name={IconNamesEnum.bell}></Icon>
     </div>

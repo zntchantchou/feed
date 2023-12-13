@@ -9,7 +9,7 @@
 
 .root svg {
   height: 1.25rem;
-  margin-right: 1.2rem;
+  margin-right: .8rem;
   transition: 0.2s;
 }
 
@@ -21,4 +21,9 @@
 
 .bookmarked:hover svg {
   stroke: grey;
+}
+
+.upvotes {
+  color: lightgray;
+  display: flex;
 }

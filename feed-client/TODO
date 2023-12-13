@@ -1,14 +1,28 @@
-TODAY: 
+
+NEXT:
+    ☐ Implement active sidebar item
+    ☐ Do not handle bookmarks with state, use cache invalidation and rerender like upvotes 
+    ☐ Clean response headers   
+  VIEWS:
+    ☐ Add not found page
+    ☐ Add error page
+    ☐ Add loading page / loader
+    ☐ Add search page
+  Search:
+    ☐ Add searchbar with autocomplete on each keystroke for contact search 
+  AUTH:
+    ☐ Add client form validation to Login
+    ☐ Add client form validation to Signup
+    
+  DONE: 
   ✔ Add bookmarks behaviour to bookmarks page @done(23-12-10 11:36)
   ✔ Import sidenav icons as components @started(23-12-10 11:37) @done(23-12-10 13:31) @lasted(1h54m45s)
-  ✘ Find better method than onsettled to update ui after createBookmark and deleteBookmark\ @cancelled(23-12-11 18:21)
-  ☐ Clean response headers 
-  ☐ Show bookmarked date 
-  ☐ Handle bookmark being removed (visual)
-  ☐ Invalidate 'bookmarks' query cache when an article is removed from bookmarks
-  ☐ Add api-level request validation
-
-Bookmarks:
+  ✔ Handle bookmark being removed (visual) @done(23-12-13 01:32)
+  ✔ Invalidate 'bookmarks' query cache when an article is removed from bookmarks @done(23-12-13 01:32)
+  ✔ Add api-level request validation @done(23-12-13 01:32)
+  Refacto: 
+  ✔ clean Auth module @started(23-12-07 20:53) @done(23-12-08 02:28) @lasted(5h35m43s)
+  Bookmarks:
   ✔ Create Bookmark page @started(23-12-08 14:19) @done(23-12-09 10:02) @lasted(19h43m51s)
   ✔ Get all bookmarks at mount @done(23-12-09 10:02)
   ✔ Sort in youngest to oldest order @done(23-12-09 10:02)
@@ -16,36 +30,18 @@ Bookmarks:
   ✔ implement delete bookmark @done(23-12-09 11:10)
   ✔ Handle bookmarks on feed @done(23-12-11 02:10)
   ✔ Handle bookmarks on bookmarks @done(23-12-11 02:10)
-  ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
-
-VIEWS:
+  UX :
+  ✔ Find visual cue to show article has already been upvoted @done(23-12-13 01:33)
+  Pages:          
   ✔ Add signup page @done(23-12-07 20:53)
-  ✔ Add login page @started(23-12-06 00:50) @done(23-12-07 15:31) @lasted(1d14h41m3s)
-  ☐ Add not found page
-  ☐ Add error page
-  ☐ Add loading page
-  ☐ Add search page
-  
-Search :
-  ☐ Add searchbar with autocomplete on each keystroke for contact search 
-    
-AUTH:
-  ☐ Add client form validation to Login
-  ☐ Add client form validation to Signup
-
-ROUTING:  
+  ✔ Add login page @started(23-12-06 00:50) @done(23-12-07 15:31) @lasted(1d14h41m3s)  
+  ROUTING:  
   ✔ Centralized routing @started(23-12-05 12:02) @done(23-12-05 23:30) @lasted(11h28m2s)
-  ☐ redirect user automatically if authenticated @started(23-12-07 22:17)
-  ☐ find auth guard mechanism in the router (data in router?)
-
-UX :
-  ☐ Find visual cue to show article has already been upvoted
-
-Refacto: 
-  ✔ clean Auth module @started(23-12-07 20:53) @done(23-12-08 02:28) @lasted(5h35m43s)
-
-
- 
-
-
+  ✔ redirect user automatically if authenticated @started(23-12-07 22:17) @done(23-12-13 01:35) @lasted(5d3h18m16s)
+  
+  CANCELLED:
+  ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
+  ✘ find auth guard mechanism in the router (data in router?) @cancelled(23-12-13 01:35)
+  ✘ Show bookmarked date @cancelled(23-12-13 01:38)
+  ✘ Find better method than onsettled to update ui after createBookmark and deleteBookmark\ @cancelled(23-12-11 18:21)
   

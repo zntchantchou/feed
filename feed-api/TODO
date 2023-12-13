@@ -3,23 +3,15 @@ Upvotes:
   ✔ create migration @done(23-12-12 11:52)
   ✔ create model @done(23-12-12 11:52)
   ✔ create upvotes module @done(23-12-12 15:22)
-  ☐ create validation schema
-  ☐ implement CREATE controller
-  ☐ implement DELETE controller
-  ☐ Add upvotes to Articles in the getBookmarks request
+  ✔ create validation schema @done(23-12-13 00:08)
+  ✔ implement CREATE controller @done(23-12-13 00:08)
+  ✔ implement DELETE controller @done(23-12-13 00:08)
+  ✔ implement GET USER UPVOTES @done(23-12-13 02:15)
+  ✔ implement GET UPVOTES @done(23-12-13 02:15)
+  ✘ Add upvotes to Articles in the getBookmarks request @cancelled(23-12-13 02:16)
+  ✔ fix upvotes unique constraint not working @started(23-12-13 01:43) @done(23-12-13 02:16) @lasted(33m44s)
   ☐ Add source to article: remove it from the title by splitting string
-  
-
-Bookmarks:
-  ✔ Create Model @done(23-12-09 06:23)
-  ✔ Link to article @done(23-12-09 06:23)
-  ✔ CreateBookmark method @done(23-12-09 06:23)
-  ✔ Add unique to bookmark model => userId+ArticleId @done(23-12-09 07:56)
-  ✔ GetBookmarks method @done(23-12-09 09:41)
-  ✔ DeleteBookmark method @done(23-12-09 11:42)
-  ✔ Get bookmarks from feed too @done(23-12-11 04:00)
-  ✔ use query to bookmarks to let each article know if it is bookmarked @done(23-12-11 04:00)
-  ✘ Store new bookmark in localstorage to display even if new article could not be saved @cancelled(23-11-24 13:44)
+  ☐ get upvotes should be scoped (time) to last few days
 
 Auth: 
   ✔ Setup firebase auth sdk @done(23-12-08 14:20)
@@ -35,7 +27,6 @@ Recommandations:
   ☐ User should be notified if they get a recommendation
   ☐ User should be notified if they get a contact request
 
-
 Downvote:
   ☐ Downvote article 
 
@@ -43,27 +34,6 @@ Contacts:
   ☐ Contact Request 
   ☐ Search endpoint 
 
-  ✔ (Users on firebase) @done(23-12-11 03:59)
-  Models:
-    Article:
-    - author 
-    - source
-    - description
-    - url
-    - urlToImage
-  ☐ ContactRequest
-    - From : User
-    - To : User
-    - status : Awaiting (Accepted, Declined)
-  ☐ Upvotes
-    - user: Id
-  ☐ Downvote 
-    - user: Id
-    - article: Id
-  ☐ Recommendations
-  ☐ Tags 
-  ☐ Searches
-  
 Logging:
   ☐ file logger
   ☐ dev logger

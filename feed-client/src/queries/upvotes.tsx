@@ -6,8 +6,9 @@ import {
   formatArticle,
   getDefaultHeaders,
 } from "./http.utils";
+import { Upvotes } from "types/upvotes";
 
-export async function getUpvotes() {
+export async function getUpvotes(): Promise<Upvotes> {
   const res = await fetch(process.env.REACT_APP_API_URL + "/upvotes", {
     method: GET,
     headers: await getDefaultHeaders(),

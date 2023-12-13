@@ -29,7 +29,10 @@ export class UpvotesController {
     try {
       console.log('[UpvotesController] GET UPVOTES USR ID');
       const upvotes = await this.upvoteService.getUpvotes();
-      return res.status(HttpStatus.OK).send(upvotes);
+      const userUpvotes = await this.upvoteService.getUpvotesByUserId(
+        req?.userId,
+      );
+      return res.status(HttpStatus.OK).send({ all: upvotes, userUpvotes });
     } catch (e) {
       console.log('[UpvotesController ] get upvotes error : \n', e);
       return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();

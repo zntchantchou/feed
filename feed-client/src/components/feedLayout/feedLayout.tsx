@@ -5,16 +5,12 @@ import { useQuery } from "@tanstack/react-query";
 import { getUpvotes } from "queries/upvotes";
 import { useState, useEffect } from "react";
 import { getUid } from "utils/articles";
+import { UpvoteCount, UserUpvote, Upvotes } from "types/upvotes";
 
 interface FeedProps {
   articles?: ArticleType[];
   isLoading: boolean;
 }
-
-type Upvote = {
-  articleId: string;
-  upvotes: string;
-};
 
 export default function FeedLayout({
   articles,
@@ -27,7 +23,11 @@ export default function FeedLayout({
     error: getUpvotesError,
   } = useQuery({
     queryKey: ["upvotes"],
-    queryFn: () => getUpvotes(),
+    queryFn: () => {
+      console.log("queryFn SETTING READY TO FALSE");
+      setAreUpvotesReady(false);
+      return getUpvotes();
+    },
   });
 
   const [feedArticles, setFeedArticles] = useState(articles);
@@ -38,24 +38,41 @@ export default function FeedLayout({
   }, [articles]);
 
   useEffect(() => {
-    if (!areUpvotesReady && feedArticles && upvotes && upvotes.length >= 1) {
+    if (
+      !areUpvotesReady &&
+      feedArticles &&
+      upvotes &&
+      Array.isArray(upvotes?.all)
+    ) {
+      console.log("Upvotes + feedArticles USEFFECT ", upvotes);
       setFeedArticles(addUpvotesToArticles(feedArticles, upvotes));
       setAreUpvotesReady(true);
     }
   }, [upvotes, feedArticles]);
 
+  useEffect(() => {
+    console.log("Upvotes USEFFECT ", upvotes);
+  }, [upvotes]);
+  /**
+   * Adds properties 'upvotes' and 'upvotedByUser' to each article
+   */
   const addUpvotesToArticles = (
     articles: ArticleType[],
-    votes: Upvote[]
+    upvotes: Upvotes
   ): ArticleType[] => {
     return articles.map((article: ArticleType) => {
-      const upvote = votes.find(
-        (upvote: Upvote) => upvote.articleId === getUid(article)
+      const articleUid = getUid(article);
+      const upvoteCount = upvotes?.all.find(
+        (upvote: UpvoteCount) => upvote.articleId === articleUid
       );
-      if (upvote) {
-        return { ...article, upvotes: upvote?.upvotes };
-      }
-      return article;
+      const userUpvote = upvotes.userUpvotes.find(
+        (upvote: UserUpvote) => upvote.articleId === articleUid
+      );
+      return {
+        ...article,
+        upvotes: upvoteCount?.upvotes,
+        upvotedByUser: !!userUpvote,
+      };
     });
   };
 

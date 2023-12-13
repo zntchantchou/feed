@@ -9,6 +9,7 @@ export interface Article {
   urlToImage?: string;
   isBookmarked?: boolean;
   upvotes?: string;
+  upvotedByUser?: boolean;
 }
 
 export type StoredArticles = {
