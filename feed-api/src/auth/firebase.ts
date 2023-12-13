@@ -9,7 +9,7 @@ const firebaseConfig = {
   messagingSenderId: process.env.MESSAGING_SENDER_ID,
   appId: process.env.APP_ID,
   credential: firebaseAdmin.credential.cert(
-    'config_secrets/firebase-credentials.json',
+    'config_secrets/google-credentials.json',
   ),
 };
 
