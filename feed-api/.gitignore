@@ -1,6 +1,7 @@
 # compiled output
 /dist
 /config
+/config_secrets
 /tags
 /node_modules
 
