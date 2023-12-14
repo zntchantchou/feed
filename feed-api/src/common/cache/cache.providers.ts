@@ -5,12 +5,23 @@ export const cacheProviders = [
   {
     provide: 'redis-client',
     useFactory: async () => {
-      const redisClient = await createClient({
-        url: 'redis://' + process.env.REDIS_URL,
-      }).on('error', (err) => console.log('REDIS CLIENT ERROR', err));
+      const url = `redis://default:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`;
+      console.log('URL ', url);
+
+      const redisClient = await createClient({ url })
+        .on('error', (err) => console.log('REDIS CLIENT ERROR ', err))
+        .on('connect', (c) => {
+          console.log('Redis connected ', c);
+        })
+        .on('reconnecting', () => {
+          console.log('Redis reconnecting');
+        })
+        .on('ready', () => {
+          console.log('Redis ready!');
+        });
       try {
-        await redisClient.connect();
         // Add user schema to store in redis as searchable JSON objects
+        await redisClient.connect();
         await createUserIndex(redisClient as RedisClientType);
         return redisClient;
       } catch (e) {

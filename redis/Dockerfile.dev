@@ -1,0 +1,10 @@
+FROM redis/redis-stack
+
+EXPOSE 6379
+
+COPY redis.conf /usr/local/etc/redis/redis.conf
+
+RUN apt install net-tools
+
+CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
+

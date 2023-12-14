@@ -14,15 +14,11 @@ services:
       - db_user
 
   redis-cache:
-    image: redis/redis-stack
+    network_mode: "host"
+    build:
+      context: ./redis
+      dockerfile: Dockerfile.dev
     restart: always
-    ports:
-      - '6379:6379'
-    volumes:
-      - cache:/data
-    environment:
-      REDIS_HOST: localhost
-      REDIS_PORT: 6379
 volumes:
   cache:
     driver: local

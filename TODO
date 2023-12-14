@@ -6,4 +6,5 @@ SERVICES:
 REDIS:
   ☐ Authenticate redis with password saved in secrets 
   ☐ learn about search and operators 
+  ☐ in conf listen only to needed network / protocol(s)
 
