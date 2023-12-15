@@ -12,14 +12,10 @@ async function bootstrap() {
   const { PORT } = process?.env;
   if (PORT) await app.listen(PORT);
 
-  // const appCheck = { ...auth.appCheck()?.app?.options };
-  // delete appCheck.credential;
+  const appCheck = { ...auth.appCheck()?.app?.options };
+  delete appCheck.credential;
 
-  console.log(
-    '-------- FIREBASE APPCHECK -------- \n \n',
-    auth.appCheck()?.app,
-    // process.env,
-  );
+  console.log('-------- FIREBASE APPCHECK -------- \n \n', auth.appCheck());
   console.log(`Listening on port ${PORT} ..`);
 }
 
