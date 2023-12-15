@@ -4,7 +4,7 @@ SERVICES:
   ☐ Dockerize client 
 
 REDIS:
-  ☐ Authenticate redis with password saved in secrets 
-  ☐ learn about search and operators 
-  ☐ in conf listen only to needed network / protocol(s)
+S  ☐ learn about search and operators 
+  ✔ Authenticate redis with password saved in secrets @done(23-12-14 23:27)
+  ✔ in conf listen only to needed network / protocol(s) @done(23-12-14 23:27)
 
