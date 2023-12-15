@@ -15,16 +15,30 @@ export class cacheSeederService {
     const startTime = Date.now();
     try {
       const statuses = await Promise.all(
-        users.map((u) => this.redisClient.json.set(`u:${u.uid}`, '$', u)),
+        users.map((user, i) => this.redisClient.json.set(`u:${i}`, '$', user)),
       );
       console.log('[cacheSeederService] CACHED STATUSES => ', statuses);
       const stopTime = Date.now();
-      console.log(
-        'TOTAL CACHING TIME => ',
-        ((stopTime - startTime) / 1000).toString(),
-      );
+      const totalTime = ((stopTime - startTime) / 1000).toString();
+      console.log('TOTAL CACHING TIME => ', totalTime);
     } catch (e) {
       console.log('[cacheSeederService] Error', e);
+    }
+  }
+
+  async searchUsers() {
+    try {
+      // const result = await this.redisClient.ft.search(
+      //   'idx:u',
+      //   `@email:montgomeryjames@genmom.com`,
+      // );
+
+      const res = await this.redisClient.ft.search(`idx:u`, '*urr*', {
+        LIMIT: { from: 0, size: 100 },
+      });
+      return res;
+    } catch (err) {
+      console.log('[searchUsers] err', err);
     }
   }
 }

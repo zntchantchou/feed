@@ -24,12 +24,9 @@ export class AppController {
   async check() {
     console.log('[AppController] GET CHECK ------');
     const users = await listUsers();
-    const cacheUsers = await Promise.all(
-      users.map((u) => this.redisClient.json.set(`u:${u.uid}`, '$', u)),
-    );
     const user = users[0];
-    const savedUser = await this.redisClient.json.get(`u:${user.uid}`);
-    console.log('SAVED USER => ', savedUser);
+    // const savedUser = await this.redisClient.ft.search({});
+    console.log('SAVED USER => ', user);
     return { check: 'ok' };
   }
 }
