@@ -8,7 +8,7 @@ export const getDefaultHeaders = async (): Promise<Headers> => {
     throw new Error("Could not get user's token");
   }
   headers.append("Content-Type", "application/json");
-  headers.append("token", token);
+  headers.append("authorization", `bearer ${token}`);
   return headers;
 };
 
