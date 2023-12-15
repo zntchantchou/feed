@@ -15,7 +15,7 @@ async function bootstrap() {
 
   console.log(
     '-------- FIREBASE APPCHECK -------- \n \n',
-    auth.appCheck().app.options,
+    auth.appCheck().app.options.serviceAccountId,
   );
   console.log(`Listening on port ${PORT} ..`);
 }

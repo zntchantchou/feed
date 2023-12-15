@@ -25,20 +25,4 @@ export class cacheSeederService {
       console.log('[cacheSeederService] Error', e);
     }
   }
-
-  async searchUsers() {
-    try {
-      // const result = await this.redisClient.ft.search(
-      //   'idx:u',
-      //   `@email:montgomeryjames@genmom.com`,
-      // );
-
-      const res = await this.redisClient.ft.search(`idx:u`, '*urr*', {
-        LIMIT: { from: 0, size: 100 },
-      });
-      return res;
-    } catch (err) {
-      console.log('[searchUsers] err', err);
-    }
-  }
 }

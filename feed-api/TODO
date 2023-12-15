@@ -1,4 +1,8 @@
+Search: 
 
+  ☐ sanitize search input
+  ☐ How much slower would search be with encryption on emails 
+    
 Upvotes:
   ✔ create migration @done(23-12-12 11:52)
   ✔ create model @done(23-12-12 11:52)

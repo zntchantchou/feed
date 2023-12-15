@@ -6,16 +6,18 @@ import { ConfigModule } from '@nestjs/config';
 import { TokenMiddleware } from './common/middleware/token/token.middleware';
 import { BookmarksController } from 'src/modules/bookmarks/bookmarks.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
-import Article from 'db/models/Article';
-import Bookmark from 'db/models/Bookmark';
-import Upvote from 'db/models/Upvote';
 import { UpvotesController } from '@modules/upvotes/upvotes.controller';
 import { UpvotesModule } from '@modules/upvotes/upvotes.module';
 import { ArticlesModule } from '@modules/articles/articles.module';
-import { cacheProviders } from '@common/cache/cache.providers';
+import { ContactsController } from '@modules/contacts/contacts.controller';
+import Article from 'db/models/Article';
+import Bookmark from 'db/models/Bookmark';
+import Upvote from 'db/models/Upvote';
+import { ContactsModule } from '@modules/contacts/contacts.module';
 
 @Module({
   imports: [
+    ContactsModule,
     BookmarksModule,
     ArticlesModule,
     UpvotesModule,
@@ -31,13 +33,13 @@ import { cacheProviders } from '@common/cache/cache.providers';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, ...cacheProviders],
+  providers: [AppService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(TokenMiddleware)
       // all routes are authenticated
-      .forRoutes(BookmarksController, UpvotesController);
+      .forRoutes(BookmarksController, UpvotesController, ContactsController);
   }
 }

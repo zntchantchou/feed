@@ -6,14 +6,8 @@ async function bootstrap() {
   try {
     const appContext = await NestFactory.createApplicationContext(SeederModule);
     const cacheSeeder = appContext.get(cacheSeederService);
-    // await cacheSeeder.seedUsers();
-    const found = await cacheSeeder.searchUsers();
-    console.log('found ===> \n', found);
-    if (found?.documents) {
-      found.documents.map((d) => console.log(d.value));
-    }
+    await cacheSeeder.seedUsers();
   } catch (e) {
-    console.log('Done ');
     console.log('[cacheSeeder] ERROR : ', e);
   }
 }
