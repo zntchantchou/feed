@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   feed-db:
+    container_name: feed-db
     image: postgres:16-alpine3.18
     ports:
       - 8002:5432
@@ -14,7 +15,9 @@ services:
       - db_user
 
   redis-cache:
-    network_mode: "host"
+    container_name: redis-cache
+    ports:
+      - "6379:6379"
     build:
       context: ./redis
       dockerfile: Dockerfile.dev
