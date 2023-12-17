@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { RedisClientType } from 'redis';
 import * as users from './users.json';
+import { shortenEmail } from '../src/common/utils/utils';
 
 @Injectable()
 export class cacheSeederService {
@@ -15,7 +16,17 @@ export class cacheSeederService {
     const startTime = Date.now();
     try {
       const statuses = await Promise.all(
-        users.map((user, i) => this.redisClient.json.set(`u:${i}`, '$', user)),
+        users.map((user, i) => {
+          const finalUser = { ...user, shortEmail: user.email } as {
+            email?: string;
+            shortEmail: string;
+          };
+          delete finalUser?.email;
+          return this.redisClient.json.set(`u:${i}`, '$', {
+            ...finalUser,
+            shortEmail: shortenEmail(finalUser.shortEmail),
+          });
+        }),
       );
       console.log('[cacheSeederService] CACHED STATUSES => ', statuses);
       const stopTime = Date.now();

@@ -7,15 +7,14 @@ export const userSchema: RediSearchSchema = {
   },
   '$.displayName': {
     type: SchemaFieldTypes.TEXT,
-    AS: 'displayName',
+    AS: 'displayname',
   },
-  '$.email': {
+  '$.shortEmail': {
     type: SchemaFieldTypes.TEXT,
-    SORTABLE: true,
-    AS: 'email',
+    AS: 'shortEmail',
   },
   '$.photoUrl': {
     type: SchemaFieldTypes.TEXT,
-    AS: 'photoUrl',
+    AS: 'photourl',
   },
 };

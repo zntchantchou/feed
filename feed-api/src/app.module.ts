@@ -10,10 +10,11 @@ import { UpvotesController } from '@modules/upvotes/upvotes.controller';
 import { UpvotesModule } from '@modules/upvotes/upvotes.module';
 import { ArticlesModule } from '@modules/articles/articles.module';
 import { ContactsController } from '@modules/contacts/contacts.controller';
+import { ContactsModule } from '@modules/contacts/contacts.module';
+import ContactRequest from 'db/models/ContactRequest';
 import Article from 'db/models/Article';
 import Bookmark from 'db/models/Bookmark';
 import Upvote from 'db/models/Upvote';
-import { ContactsModule } from '@modules/contacts/contacts.module';
 
 @Module({
   imports: [
@@ -29,7 +30,7 @@ import { ContactsModule } from '@modules/contacts/contacts.module';
       password: process.env.DB_PASSWORD,
       username: process.env.DB_USER,
       dialect: 'postgres',
-      models: [Article, Bookmark, Upvote],
+      models: [Article, Bookmark, Upvote, ContactRequest],
     }),
   ],
   controllers: [AppController],

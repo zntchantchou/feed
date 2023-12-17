@@ -7,3 +7,13 @@ export const contactSearchSchema = z
   .required();
 
 export type contactSearchDto = z.infer<typeof contactSearchSchema>;
+
+export const createContactRequestSchema = z
+  .object({
+    email: z.string().email(),
+  })
+  .required();
+
+export type createContactRequestDto = z.infer<
+  typeof createContactRequestSchema
+>;
