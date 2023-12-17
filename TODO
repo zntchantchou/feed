@@ -9,3 +9,26 @@ REDIS:
   ✔ Authenticate redis with password saved in secrets @done(23-12-14 23:27)
   ✔ in conf listen only to needed network / protocol(s) @done(23-12-14 23:27)
 
+  TODAY:
+
+    FRONT : 
+      ☐ Create contacts page  
+        ☐ Search bar 
+        ☐ my contacts  
+        ☐ contact requests   
+      ☐ Add autocomplete 
+      ☐ Add default icon for items, or the actual image, test with google account
+    
+    Backend: 
+      ✔ CREATE contactRequest request migration @done(23-12-17 15:29)
+      ✔ create contactRequest MODEL @done(23-12-17 15:29)
+      ✔ create Contacts controller @done(23-12-17 14:53)
+      ✔ create Search contacts @done(23-12-17 14:53)      
+      ☐ make search a post /contacts/search
+      ☐ POST /contacts/request // createContactRequest
+      ☐ GET /contacts/request // Get user sent and received contactRequests  
+      ☐ PUT  /contacts/request // replyToContactRequest
+      ☐ DELETE /contacts/request // cancelContactRequest
+      
+      ☐ use redisInsights to monitor
+  

@@ -1,26 +1,14 @@
 import { ValidatorPipe } from '@common/pipes/validatorPipe';
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Put,
-  Req,
-  Res,
-  UsePipes,
-} from '@nestjs/common';
+import { Body, Controller, Get, Put, Req, Res, UsePipes } from '@nestjs/common';
 import { Response } from 'express';
 import { contactSearchDto, contactSearchSchema } from './contacts.schemas';
+import { ContactsService } from './contacts.service';
 
 @Controller('contacts')
 export class ContactsController {
-  @Get()
-  async sayHi() {
-    console.log('HI');
-    return 'hi';
-  }
+  constructor(private readonly contactService: ContactsService) {}
 
-  @Post()
+  @Put()
   @UsePipes(new ValidatorPipe(contactSearchSchema))
   async search(
     @Body() { input }: contactSearchDto,
@@ -28,8 +16,10 @@ export class ContactsController {
     @Res() res: Response,
   ) {
     try {
-      console.log('ContactsController input => ', input);
-      return res.status(200).send('ok');
+      // sanitize string
+      const results = await this.contactService.search(input);
+      console.log('SEARCH RESULTS => --------------- \n ', results);
+      return res.status(200).send({ results });
     } catch (e) {
       console.log('e', e);
     }

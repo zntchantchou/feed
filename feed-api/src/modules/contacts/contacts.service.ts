@@ -9,14 +9,9 @@ export class ContactsService {
   ) {}
   async search(input: string, limit = 100) {
     try {
-      const res = await this.redisClient.ft.search(
-        `idx:u`,
-        `@email:*${input}*`,
-        {
-          LIMIT: { from: 0, size: limit },
-        },
-      );
-      return res;
+      return await this.redisClient.ft.search(`idx:u`, `@email:*${input}*`, {
+        LIMIT: { from: 0, size: limit },
+      });
     } catch (err) {
       console.log('[searchUsers] err', err);
     }
