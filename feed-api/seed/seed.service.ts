@@ -15,11 +15,7 @@ export class cacheSeederService {
     const startTime = Date.now();
     try {
       const statuses = await Promise.all(
-<<<<<<< HEAD
         users.map((user) => {
-=======
-        users.map((user, i) => {
->>>>>>> 0e8ffbea2e63be13349d55be2e5488e95ac672c0
           return this.redisClient.json.set(`u:${user.uid}`, '$', {
             ...user,
             shortEmail: shortenEmail(user.email),

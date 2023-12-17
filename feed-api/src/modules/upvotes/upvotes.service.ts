@@ -2,7 +2,7 @@ import { createUpvoteDto, deleteUpvoteDto } from './upvote.schema';
 import { ArticlesService } from '@modules/articles/articles.service';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { getUid } from '@modules/articles/utils';
+import { formatArticle, getUid } from '@modules/articles/utils';
 import { Op } from 'sequelize';
 import Upvote from 'db/models/Upvote';
 import sequelize from 'sequelize';
@@ -39,7 +39,9 @@ export class UpvotesService {
   }
 
   async create(article: createUpvoteDto, userId: string) {
-    const existingArticle = await this.articleService.findOrCreate(article);
+    const existingArticle = await this.articleService.findOrCreate(
+      formatArticle(article),
+    );
     const saved = await this.upvoteModel.create({
       articleId: existingArticle.uid,
       userId,

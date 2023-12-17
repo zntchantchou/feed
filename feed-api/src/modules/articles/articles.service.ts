@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import Article from 'db/models/Article';
-import { getUid } from './utils';
+import { formatArticle, getUid } from './utils';
 import { Op } from 'sequelize';
 import { articleDto } from '@modules/articles/articles.schema';
+import { format } from 'path';
 
 @Injectable()
 export class ArticlesService {
@@ -37,6 +38,6 @@ export class ArticlesService {
     if (existing) {
       return existing;
     }
-    return await this.create(article);
+    return await this.create(formatArticle(article));
   }
 }
