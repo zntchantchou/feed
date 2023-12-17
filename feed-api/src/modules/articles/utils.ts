@@ -14,7 +14,9 @@ export const formatArticle = (article: createUpvoteDto) => {
   return {
     ...article,
     description: shortenString(article?.description, 255),
-    content: shortenString(article?.content, 255),
+    content: article.content
+      ? shortenString(article?.content, 255)
+      : article.content,
   };
 };
 

@@ -42,10 +42,12 @@ export class UpvotesService {
     const existingArticle = await this.articleService.findOrCreate(
       formatArticle(article),
     );
+    console.log('EXISTING ARTICLE', existingArticle);
     const saved = await this.upvoteModel.create({
       articleId: existingArticle.uid,
       userId,
     });
+    console.log('saved', saved);
     return saved;
   }
 

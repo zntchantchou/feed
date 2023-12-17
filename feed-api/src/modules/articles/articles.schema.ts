@@ -13,9 +13,9 @@ export const articleSchema = z
     description: z.string(),
     url: z.string().url(),
     urlToImage: z.string().url(),
-    source: z.string().optional().nullable(),
+    source: z.string().nullable(),
     publishedAt: z.string(),
-    content: z.string().optional(),
+    content: z.string().nullable(),
   })
   .required();
 
