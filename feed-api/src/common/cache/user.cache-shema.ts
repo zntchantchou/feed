@@ -13,6 +13,9 @@ export const userSchema: RediSearchSchema = {
     type: SchemaFieldTypes.TEXT,
     AS: 'shortEmail',
   },
+  '$.email': {
+    type: SchemaFieldTypes.TEXT,
+  },
   '$.photoUrl': {
     type: SchemaFieldTypes.TEXT,
     AS: 'photourl',

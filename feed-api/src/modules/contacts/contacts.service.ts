@@ -27,7 +27,7 @@ export class ContactsService {
   }
 
   async getUserContacts(userId: string) {
-    console.log('getUserContactRequests');
+    // Find all accepted contact requests
     const contactRequests = await this.contactRequestModel.findAll({
       where: {
         [Op.and]: [
@@ -36,8 +36,17 @@ export class ContactsService {
         ],
       },
     });
-    if (!contactRequests) return [];
-    return contactRequests;
+
+    const requests = contactRequests.map(({ receiverId, senderId }) => {
+      // get whoever is not the user in the contact request
+      const contactId = userId === receiverId ? senderId : receiverId;
+      return this.redisClient.json.get('u:' + contactId);
+    });
+    // fetch user from redis
+    const contacts = await Promise.all(requests);
+    console.log('contacts ------ \n', contacts);
+    if (!contacts) return [];
+    return contacts;
   }
 
   /**
@@ -49,9 +58,21 @@ export class ContactsService {
    */
 
   async createContactRequest(senderId: string, email: string) {
-    console.log('createContactRequest');
-    const user = await this.getRedisUserByEmail(email);
-    return user;
+    const cacheResult = await this.getRedisUserByEmail(email);
+    const user =
+      cacheResult.documents.length > 0 ? cacheResult.documents[0] : null;
+    if (!user) return null;
+    const contactRequest = await this.contactRequestModel.create({
+      senderId,
+      receiverId: user.value.uid,
+    });
+    console.log('createContactRequest user', user.value.uid);
+    console.log('createContactRequest senderId', senderId);
+    console.log(
+      'createContactRequest CONTACT REQUEST ===== \n',
+      contactRequest,
+    );
+    return contactRequest;
   }
 
   /**
