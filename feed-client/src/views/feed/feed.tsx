@@ -6,7 +6,7 @@ import {
   getUid,
   saveArticlesToLocalStorage,
 } from "utils/articles";
-import FeedLayout from "components/feedLayout/feedLayout";
+import FeedLayout from "components/layouts/feedLayout/feedLayout";
 import { getBookmarks } from "queries/bookmarks";
 import { useEffect, useState } from "react";
 

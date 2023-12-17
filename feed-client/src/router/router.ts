@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "components/layout/layout";
+import { RouteNames } from "./routes";
+import PageLayout from "components/layouts/pageLayout/pageLayout";
 import Feed from "views/feed/feed";
 import Login from "views/login/login";
 import Signup from "views/signup/signup";
 import Bookmarks from "views/bookmarks/bookmarks";
-import { RouteNames } from "./routes";
+import Contacts from "views/contacts/contacts";
+import DefaultLayout from "components/layouts/defaultLayout/defaultLayout";
 
 export default createBrowserRouter([
   {
@@ -17,12 +19,8 @@ export default createBrowserRouter([
   },
   {
     path: "*",
-    Component: Layout,
+    Component: PageLayout,
     children: [
-      {
-        path: "",
-        Component: Feed,
-      },
       {
         path: RouteNames.feed,
         Component: Feed,
@@ -30,6 +28,20 @@ export default createBrowserRouter([
       {
         path: RouteNames.bookmarks,
         Component: Bookmarks,
+      },
+      {
+        path: RouteNames.contacts,
+        Component: DefaultLayout,
+        children: [
+          {
+            path: "*",
+            Component: Contacts,
+          },
+        ],
+      },
+      {
+        path: "*",
+        Component: DefaultLayout,
       },
     ],
   },

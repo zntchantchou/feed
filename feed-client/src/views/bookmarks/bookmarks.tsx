@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import FeedLayout from "components/feedLayout/feedLayout";
+import FeedLayout from "components/layouts/feedLayout/feedLayout";
 import { getBookmarks } from "queries/bookmarks";
 import { Article } from "types/article";
 

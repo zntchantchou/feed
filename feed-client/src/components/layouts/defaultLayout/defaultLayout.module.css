@@ -1,0 +1,8 @@
+.root {
+  width: calc(100vw - 15rem);
+  height: calc(100vh - 3rem);
+  box-sizing: border-box;
+  padding: 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

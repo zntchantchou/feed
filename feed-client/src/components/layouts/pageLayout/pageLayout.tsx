@@ -3,9 +3,9 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Auth from "auth/Auth";
 import Header from "components/header/header";
 import Sidenav from "components/sidenav/sidenav";
-import styles from "./layout.module.css";
+import styles from "./pageLayout.module.css";
 
-function Layout() {
+function PageLayout() {
   // check Authentication
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
@@ -35,4 +35,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default PageLayout;
