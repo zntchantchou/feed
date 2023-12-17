@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import auth from 'src/auth/firebase';
+import auth, { listUsers } from 'src/auth/firebase';
+import { getAuth } from 'firebase-admin/auth';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {

@@ -23,9 +23,9 @@ REDIS:
       ✔ create contactRequest MODEL @done(23-12-17 15:29)
       ✔ create Contacts controller @done(23-12-17 14:53)
       ✔ create Search contacts @done(23-12-17 14:53)      
-      ☐ GET  user contacts  /contacts @started(23-12-17 15:58)
-      ☐ make search a post /contacts/search
-      ☐ POST /contacts/request // createContactRequest
+      ✔ POST /contacts/request // createContactRequest @done(23-12-17 20:41)
+      ✔ GET  user contacts  /contacts @started(23-12-17 15:58) @done(23-12-17 22:31) @lasted(6h33m35s)
+      ✔ make search a post /contacts/search @done(23-12-17 22:31)
       ☐ GET /contacts/request // Get user sent and received contactRequests  
       ☐ PUT  /contacts/request // replyToContactRequest
       ☐ DELETE /contacts/request // cancelContactRequest

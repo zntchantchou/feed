@@ -17,7 +17,6 @@ import {
   createContactRequestSchema,
 } from './contacts.schemas';
 import { ContactsService } from './contacts.service';
-import { shortenEmail } from '@common/utils/utils';
 
 @Controller('contacts')
 export class ContactsController {
@@ -43,6 +42,7 @@ export class ContactsController {
   @Get()
   async getContacts(@Req() req, @Res() res) {
     try {
+      console.log('REQ USERID', req.userId);
       const contacts = await this.contactService.getUserContacts(req?.userId);
       console.log('[getContacts] contacts -> ', contacts);
       return res.status(200).send({ contacts });
@@ -61,13 +61,16 @@ export class ContactsController {
   ) {
     try {
       console.log('[ContactsController] createContactRequest => ', email);
-      const created = await this.contactService.createContactRequest(
+      const contactRequest = await this.contactService.createContactRequest(
         req?.userId,
         email,
       );
-      return res.json({ created });
+      if (!contactRequest) {
+        return res.status(HttpStatus.NOT_FOUND).send();
+      }
+      return res.status(HttpStatus.OK).send();
     } catch (e) {
-      console.log('e', e);
+      console.log('e', e, Object.keys(e));
       return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
     }
   }
