@@ -1,4 +1,4 @@
-import { Article } from "types/article";
+import { NewsApiArticle } from "types/article";
 import {
   getDefaultHeaders,
   POST,
@@ -12,10 +12,11 @@ export async function getBookmarks() {
     method: GET,
     headers: await getDefaultHeaders(),
   });
+  console.log("bookmarks ", bookmarks);
   return bookmarks.json();
 }
 
-export async function createBookMark(article: Article) {
+export async function createBookMark(article: NewsApiArticle) {
   console.log("createBookMark", article);
   const bookmark = await fetch(process.env.REACT_APP_API_URL + "/bookmarks", {
     method: POST,
@@ -25,7 +26,7 @@ export async function createBookMark(article: Article) {
   return bookmark.json();
 }
 
-export async function deleteBookmark(article: Article) {
+export async function deleteBookmark(article: NewsApiArticle) {
   const bookmarks = await fetch(process.env.REACT_APP_API_URL + "/bookmarks", {
     method: DELETE,
     headers: await getDefaultHeaders(),

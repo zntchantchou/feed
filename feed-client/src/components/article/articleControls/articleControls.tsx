@@ -3,10 +3,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { joinClasses } from "utils/style";
-import { Article } from "types/article";
+import { Article, NewsApiArticle } from "types/article";
 import Icon, { IconNamesEnum } from "components/icon/icon";
 import styles from "./articleControls.module.css";
 import { deleteUpvote, upVoteArticle } from "queries/upvotes";
+import { formatArticle } from "queries/http.utils";
 
 interface ArticleControlsProps {
   article: Article;
@@ -62,7 +63,7 @@ export default function ArticleControls({
     data: upvoteArticleData,
     error: upvoteArticleError,
   } = useMutation({
-    mutationFn: () => upVoteArticle(article),
+    mutationFn: () => upVoteArticle(formatArticle(article)),
     onSettled: (data) => {
       console.log("UPVOTE ONSETTLED => ", data);
       queryClient.invalidateQueries({ queryKey: ["upvotes"] });
@@ -74,7 +75,7 @@ export default function ArticleControls({
     data: deleteUpvoteData,
     error: deleteUpvoteError,
   } = useMutation({
-    mutationFn: () => deleteUpvote(article),
+    mutationFn: () => deleteUpvote(formatArticle(article)),
     onSettled: (data) => {
       console.log("DELETE UPVOTE ONSETTLED => ", data);
       queryClient.invalidateQueries({ queryKey: ["upvotes"] });
@@ -91,6 +92,7 @@ export default function ArticleControls({
 
   const handleClickUpvote = async () => {
     try {
+      console.log("article", article);
       article.upvotedByUser ? deleteUpvoteFn() : upvoteArticleFn();
       queryClient.invalidateQueries({ queryKey: ["upvotes"] });
       console.log("handleClickUpvote");

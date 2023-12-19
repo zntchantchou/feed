@@ -1,6 +1,6 @@
-import { Article, StoredArticles } from "types/article";
+import { FeedArticle, NewsApiArticle, StoredArticles } from "types/article";
 
-export function saveArticlesToLocalStorage(articles: Article[]): void {
+export function saveArticlesToLocalStorage(articles: FeedArticle[]): void {
   const updatedArticles = {
     updatedAt: new Date().toISOString(),
     articles,
@@ -8,7 +8,7 @@ export function saveArticlesToLocalStorage(articles: Article[]): void {
   localStorage.setItem("data", JSON.stringify(updatedArticles));
 }
 
-export async function getStoredArticles(): Promise<Article[] | null> {
+export async function getStoredArticles(): Promise<NewsApiArticle[] | null> {
   const articles = localStorage.getItem("data");
   if (articles) {
     const json = JSON.parse(articles) as StoredArticles;
@@ -22,7 +22,7 @@ export async function getStoredArticles(): Promise<Article[] | null> {
   return articles ? JSON.parse(articles)?.articles : null;
 }
 
-export const getUid = (article: Article) => {
+export const getUid = (article: FeedArticle) => {
   const date = new Date(article.publishedAt)
     .toISOString()
     .replace(/[^a-zA-Z0-9]/g, "");

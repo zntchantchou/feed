@@ -3,16 +3,24 @@ export interface Article {
   content?: string;
   description: string;
   publishedAt: string;
-  source?: { name?: string; id?: string };
   title: string;
   url: string;
   urlToImage?: string;
   isBookmarked?: boolean;
   upvotes?: string;
   upvotedByUser?: boolean;
+  source?: any;
+}
+
+export interface NewsApiArticle extends Article {
+  source?: { name?: string; id?: string };
+}
+
+export interface FeedArticle extends Article {
+  source: string | null;
 }
 
 export type StoredArticles = {
   updatedAt: string;
-  articles: Article[];
+  articles: NewsApiArticle[];
 };

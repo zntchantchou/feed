@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getArticles } from "queries/articles";
-import { Article as NewsArticle, StoredArticles } from "types/article";
+import { FeedArticle, NewsApiArticle, StoredArticles } from "types/article";
 import {
   getStoredArticles,
   getUid,
@@ -12,9 +12,8 @@ import { useEffect, useState } from "react";
 
 export default function Feed(): JSX.Element | null {
   // get stored article, if none query Api for new ones
-  const getNewsArticles = async () =>
-    (await getStoredArticles()) || getArticles();
-  const [feedArticles, setFeedArticles] = useState<NewsArticle[] | null>();
+  const getNewsArticles = async () => getArticles();
+  const [feedArticles, setFeedArticles] = useState<FeedArticle[] | null>();
   useState<StoredArticles | null>();
   const {
     isLoading,
@@ -39,11 +38,11 @@ export default function Feed(): JSX.Element | null {
   });
 
   const getUpdatedFeedArticles = (
-    articles: NewsArticle[]
-  ): NewsArticle[] | null => {
+    articles: FeedArticle[]
+  ): FeedArticle[] | null => {
     const articleIds: string[] = bookmarks.map(getUid);
     const updatedArticles = newsApiArticles?.map(
-      (article: NewsArticle): NewsArticle => ({
+      (article: FeedArticle): FeedArticle => ({
         ...article,
         isBookmarked: articleIds.includes(getUid(article)),
       })

@@ -1,13 +1,15 @@
-
 NEXT:
+    ✔ Format NewsArticle to correct type directly after call to NewsApi @done(23-12-19 14:40)
     ☐ Implement active sidebar item
     ☐ Do not handle bookmarks with state, use cache invalidation and rerender like upvotes 
     ☐ Clean response headers   
-  VIEWS:
+  
+VIEWS:
     ☐ Add not found page
     ☐ Add error page
     ☐ Add loading page / loader
     ☐ Add search page
+
   Search:
     ☐ Add searchbar with autocomplete on each keystroke for contact search 
   AUTH:

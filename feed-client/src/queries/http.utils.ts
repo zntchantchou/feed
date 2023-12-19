@@ -1,5 +1,5 @@
 import Auth from "auth/Auth";
-import { Article } from "types/article";
+import { FeedArticle, NewsApiArticle } from "types/article";
 
 export const getDefaultHeaders = async (): Promise<Headers> => {
   const headers = new Headers();
@@ -17,6 +17,11 @@ export const GET = "GET";
 export const PUT = "PUT";
 export const DELETE = "DELETE";
 
-export function formatArticle(article: Article) {
-  return { ...article, source: article.source?.name };
+/**
+ *
+ * @param article
+ * @returns
+ */
+export function formatArticle(article: NewsApiArticle): FeedArticle {
+  return { ...article, source: article.source?.name || null };
 }

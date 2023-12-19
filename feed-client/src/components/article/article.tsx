@@ -1,11 +1,11 @@
-import { Article as ArticleType } from "../../types/article";
+import { FeedArticle } from "../../types/article";
 import { useState } from "react";
 import { joinClasses } from "utils/style";
 import ArticleControls from "./articleControls/articleControls";
 import styles from "./article.module.css";
 
 interface ArticleProps {
-  article: ArticleType;
+  article: FeedArticle;
 }
 
 function Article({ article }: ArticleProps) {

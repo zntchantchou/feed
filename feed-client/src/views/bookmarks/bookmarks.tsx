@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import FeedLayout from "components/layouts/feedLayout/feedLayout";
 import { getBookmarks } from "queries/bookmarks";
-import { Article } from "types/article";
+import { FeedArticle } from "types/article";
+import FeedLayout from "components/layouts/feedLayout/feedLayout";
 
 export default function Bookmarks() {
   const {
@@ -23,8 +23,8 @@ export default function Bookmarks() {
     return <FeedLayout isLoading={true} />;
   }
 
-  const bookmarkedArticles: Article[] = articles.map(
-    (article: Article): Article => ({
+  const bookmarkedArticles: FeedArticle[] = articles.map(
+    (article: FeedArticle): FeedArticle => ({
       ...article,
       isBookmarked: true,
     })

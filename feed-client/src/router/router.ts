@@ -31,7 +31,7 @@ export default createBrowserRouter([
       },
       {
         path: RouteNames.contacts,
-        Component: DefaultLayout,
+        element: DefaultLayout({ title: "Contacts" }),
         children: [
           {
             path: "*",
@@ -40,8 +40,20 @@ export default createBrowserRouter([
         ],
       },
       {
+        path: RouteNames.tags,
+        element: DefaultLayout({ title: "Tags" }),
+      },
+      {
+        path: RouteNames.mostUpvoted,
+        element: DefaultLayout({ title: "Most upvoted" }),
+      },
+      {
+        path: RouteNames.recommended,
+        element: DefaultLayout({ title: "Recommended" }),
+      },
+      {
         path: "*",
-        Component: DefaultLayout,
+        Component: Feed,
       },
     ],
   },

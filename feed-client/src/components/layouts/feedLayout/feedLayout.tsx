@@ -1,6 +1,6 @@
 import styles from "./feedLayout.module.css";
 import Article from "components/article/article";
-import { Article as ArticleType } from "types/article";
+import { FeedArticle, NewsApiArticle } from "types/article";
 import { useQuery } from "@tanstack/react-query";
 import { getUpvotes } from "queries/upvotes";
 import { useState, useEffect } from "react";
@@ -8,7 +8,7 @@ import { getUid } from "utils/articles";
 import { UpvoteCount, UserUpvote, Upvotes } from "types/upvotes";
 
 interface FeedProps {
-  articles?: ArticleType[];
+  articles?: FeedArticle[];
   isLoading: boolean;
 }
 
@@ -57,10 +57,10 @@ export default function FeedLayout({
    * Adds properties 'upvotes' and 'upvotedByUser' to each article
    */
   const addUpvotesToArticles = (
-    articles: ArticleType[],
+    articles: FeedArticle[],
     upvotes: Upvotes
-  ): ArticleType[] => {
-    return articles.map((article: ArticleType) => {
+  ): FeedArticle[] => {
+    return articles.map((article: FeedArticle) => {
       const articleUid = getUid(article);
       const upvoteCount = upvotes?.all.find(
         (upvote: UpvoteCount) => upvote.articleId === articleUid
@@ -78,8 +78,8 @@ export default function FeedLayout({
 
   if (isLoading || !feedArticles) return <div className={styles.main}></div>;
   const content = feedArticles
-    .filter((article: ArticleType) => !!article.urlToImage)
-    .map((article: ArticleType) => (
+    .filter((article: FeedArticle) => !!article.urlToImage)
+    .map((article: FeedArticle) => (
       <Article article={article} key={article.title} />
     ));
 

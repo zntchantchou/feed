@@ -21,8 +21,20 @@ import { ContactsService } from './contacts.service';
 @Controller('contacts')
 export class ContactsController {
   constructor(private readonly contactService: ContactsService) {}
+  @Get()
+  async getContacts(@Req() req, @Res() res) {
+    try {
+      console.log('REQ USERID', req.userId);
+      const contacts = await this.contactService.getUserContacts(req?.userId);
+      console.log('[getContacts] contacts -> ', contacts);
+      return res.status(200).send({ contacts });
+    } catch (e) {
+      console.log('e', e);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
+    }
+  }
 
-  @Post()
+  @Post('search')
   @UsePipes(new ValidatorPipe(contactSearchSchema))
   async search(
     @Body() { input }: contactSearchDto,
@@ -34,18 +46,6 @@ export class ContactsController {
       const results = await this.contactService.search(input);
       console.log('SEARCH RESULTS => --------------- \n ', results);
       return res.status(200).send({ results });
-    } catch (e) {
-      console.log('e', e);
-      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
-    }
-  }
-  @Get()
-  async getContacts(@Req() req, @Res() res) {
-    try {
-      console.log('REQ USERID', req.userId);
-      const contacts = await this.contactService.getUserContacts(req?.userId);
-      console.log('[getContacts] contacts -> ', contacts);
-      return res.status(200).send({ contacts });
     } catch (e) {
       console.log('e', e);
       return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
