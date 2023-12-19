@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.controls {
+  /* background-color: yellow; */
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.buttonLabel {
+  margin-left: 1rem;
+}

@@ -1,0 +1,33 @@
+.main {
+  height: 3rem;
+  padding: .4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 3px;
+  box-sizing: border-box;
+  margin-top: .5rem;
+}
+
+.default {
+  background-color: orangered;
+}
+
+.default:hover {
+  background-color: rgba(255, 93, 34, 0.842);
+}
+
+.dark {
+  background-color: #303030;
+}
+
+.dark:hover {
+  /* background-color: rgb(18, 18, 18); */
+  color: orangered;
+}
+
+.dark,
+.default {
+  color: #fff;
+}

@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: .2rem 2rem 0rem 2rem;
+  box-sizing: border-box;
+  height: 4rem;
+  background-color: #303030;
+  cursor: pointer;
+  border-radius: .3rem;
+  margin-bottom: 1rem;
+}
+
+.email {
+  font-size: large;
+  color: lightgray;
+  margin-left: 2rem;
+}

@@ -7,6 +7,7 @@ import { ReactComponent as FlagIcon } from "assets/flag.svg";
 import { ReactComponent as FolderIcon } from "assets/folder.svg";
 import { ReactComponent as UserIcon } from "assets/user.svg";
 import { ReactComponent as LogoutIcon } from "assets/logout.svg";
+import { ReactComponent as AddContactIcon } from "assets/add-contact.svg";
 import { ReactElement, SVGProps } from "react";
 
 export enum IconNamesEnum {
@@ -19,6 +20,7 @@ export enum IconNamesEnum {
   flag = "flag",
   user = "user",
   logout = "logout",
+  addContact = "addContact",
 }
 
 interface IconProps extends SVGProps<SVGSVGElement> {
@@ -41,6 +43,7 @@ const icons: Icons = {
   folder: (props: IconProps) => <FolderIcon {...props} />,
   user: (props: IconProps) => <UserIcon {...props} />,
   logout: (props: IconProps) => <LogoutIcon {...props} />,
+  addContact: (props: IconProps) => <AddContactIcon {...props} />,
 };
 
 function Icon(props: IconProps): ReactElement<SVGProps<SVGSVGElement>, any> {
