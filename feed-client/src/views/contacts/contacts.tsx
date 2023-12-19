@@ -51,9 +51,11 @@ export default function Contacts() {
           </>
         </Button>
       </div>
-      {contacts.map((c: IContact, i: number) => (
-        <Contact contact={c} key={i} />
-      ))}
+      <div className={styles.contacts}>
+        {contacts.map((c: IContact, i: number) => (
+          <Contact contact={c} key={i} />
+        ))}
+      </div>
     </div>
   );
 }

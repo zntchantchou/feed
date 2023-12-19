@@ -4,15 +4,17 @@
   justify-content: start;
   padding: .2rem 2rem 0rem 2rem;
   box-sizing: border-box;
-  height: 4rem;
+  height: 2.7rem;
+  min-height: 2.7rem;
+
   background-color: #303030;
   cursor: pointer;
   border-radius: .3rem;
-  margin-bottom: 1rem;
+  margin-bottom: .3rem;
 }
 
 .email {
-  font-size: large;
+  font-size: medium;
   color: lightgray;
   margin-left: 2rem;
 }
