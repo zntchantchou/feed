@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 
 export default function Feed(): JSX.Element | null {
   // get stored article, if none query Api for new ones
-  const getNewsArticles = async () => getArticles();
+  const getNewsArticles = async () => getStoredArticles() || getArticles();
   const [feedArticles, setFeedArticles] = useState<FeedArticle[] | null>();
   useState<StoredArticles | null>();
   const {
